@@ -10,6 +10,7 @@ import React from "react";
 import { HEADER_LINKS } from "../constants";
 import HeaderLinksSection from "./HeaderLinksSection";
 import TransactionsCenter from "../../../Web3Components/TransactionsCenter";
+import Web3StatusButton from "../../../Web3Components/Web3StatusButton";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,7 +53,7 @@ const Header = () => {
         <HeaderLinksSection headerLinks={HEADER_LINKS} />
         <Box display="flex" alignItems="center">
           <TransactionsCenter />
-          {/* <Web3StatusButton /> */}
+          <Web3StatusButton />
         </Box>
       </Toolbar>
     </AppBar>

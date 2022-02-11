@@ -7,19 +7,18 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Hidden from "@material-ui/core/Hidden";
 import Jazzicon from "@metamask/jazzicon";
 import { UnsupportedChainIdError, useWeb3React } from "@web3-react/core";
-import WalletConnectIcon from "assets/img/icons/walletConnectIcon.svg";
+import WalletConnectIcon from "assets/images/icons/walletConnectIcon.svg";
 import Button from "@material-ui/core/Button";
 import { injected, walletconnect } from "ethereum/connectors";
 import { useActiveWeb3React } from "ethereum/hooks/web3";
 import React, { useEffect, useRef } from "react";
 import { useWalletModalToggle } from "state/application/hooks";
 import { shorter } from "../../../ethereum/utils";
-import KeytangoButton from "../../KeytangoComponents/KeytangoButton";
+import AppButton from "../../AppComponents/AppButton";
 import ConnectWalletButton from "../ConnectWalletButton";
 import WalletModal from "../WalletModal";
 import { formatConnectorName } from "../WalletModal/AccountDetails";
-import { blackColor } from "assets/jss/nextjs-material-dashboard-pro.js";
-import { MOBILE_QUERY } from "../../componentUtils/responsive";
+import { MOBILE_QUERY } from "../../utils/responsive";
 import { switchNetworkMetamask } from "../../../ethereum/hooks/web3";
 
 const useStyles = makeStyles((theme) => ({
@@ -47,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   defaultText: {
-    color: blackColor,
+    color: "black",
     fontSize: 18,
     fontWeight: 500,
     [theme.breakpoints.down("sm")]: {
@@ -137,7 +136,7 @@ const Web3StatusButtonInner = ({ contrastText, withWallet }) => {
     //wrong network and metamask only
     //case: wrong network and walletconnect: now walletconnect doesn't detect wrong network, so no need to handle
     return (
-      <KeytangoButton
+      <AppButton
         label={"Switch Network"}
         variant="outlined"
         addElevation={false}
@@ -148,7 +147,7 @@ const Web3StatusButtonInner = ({ contrastText, withWallet }) => {
     );
   } else if (error) {
     return (
-      <KeytangoButton
+      <AppButton
         label={"Error"}
         variant="outlined"
         addElevation={false}

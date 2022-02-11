@@ -3,6 +3,9 @@ import { Contract } from "@ethersproject/contracts";
 import { Web3Provider } from "@ethersproject/providers";
 import { AddressZero } from "@ethersproject/constants";
 
+export const shorter = (str) =>
+  str?.length > 8 ? `${str.slice(0, 6)}...${str.slice(-4)}` : str;
+
 export const fetcher =
   (library, abi) =>
   (...args) => {
