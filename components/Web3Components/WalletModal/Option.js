@@ -5,12 +5,12 @@ import Paper from "@material-ui/core/Paper";
 import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
+import Image from "next/image";
 
 const useStyles = makeStyles((theme) => ({
   infoCard: {
     padding: "1rem",
     borderRadius: "12px",
-    width: "100% !important",
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
@@ -97,14 +97,7 @@ const Option = ({
         {subheader && <Box className={classes.subheader}>{subheader}</Box>}
       </Box>
       <Box className={classes.iconWrapper}>
-        <img
-          src={icon}
-          alt={"Icon"}
-          style={{
-            height: size || 24,
-            width: size || 24,
-          }}
-        />
+        <Image src={icon} alt={"Icon"} height={size || 24} width={size || 24} />
       </Box>
     </ButtonBase>
   );
