@@ -69,7 +69,6 @@ const useStyles = makeStyles((theme) => ({
   addressLink: {
     fontSize: "0.825rem",
     display: "flex",
-    color: theme.palette.grayColor[0],
     alignItems: "center",
   },
   linkIcon: {

@@ -110,7 +110,7 @@ const ContentWrapper = ({
 const LinkWrapper = ({ href, children }) =>
   isNil(href) ? children : <Link href={href}>{children}</Link>;
 
-const KeytangoButton = ({
+const AppButton = ({
   label,
   successLabel,
   loading,
@@ -183,10 +183,10 @@ const KeytangoButton = ({
   );
 };
 
-KeytangoButton.defaultProps = {
+AppButton.defaultProps = {
   successLabel: messages.successText,
   loading: false,
   success: false,
 };
 
-export default KeytangoButton;
+export default AppButton;

@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     height: "8px",
     width: "8px",
     marginRight: "8px",
-    backgroundColor: theme.palette.successColor[1],
+    // backgroundColor: theme.palette.successColor[1],
     borderRadius: "50%",
   },
   iconWrapper: {

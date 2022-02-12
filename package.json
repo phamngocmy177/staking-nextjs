@@ -25,6 +25,7 @@
     "next-compose-plugins": "^2.2.1",
     "next-images": "^1.8.4",
     "next-redux-wrapper": "^7.0.5",
+    "node-sass": "4.14.1",
     "notistack": "^1.0.10",
     "perfect-scrollbar": "^1.5.5",
     "ramda": "^0.28.0",

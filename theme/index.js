@@ -42,13 +42,14 @@ export function colors(darkMode) {
     text5: darkMode ? "#2C2F36" : "#EDEEF2",
 
     // backgrounds / greys
-    bg0: darkMode ? "#191B1F" : "#FFF",
-    bg1: darkMode ? "#212429" : "#F7F8FA",
-    bg2: darkMode ? "#2C2F36" : "#EDEEF2",
-    bg3: darkMode ? "#40444F" : "#CED0D9",
-    bg4: darkMode ? "#565A69" : "#888D9B",
-    bg5: darkMode ? "#6C7284" : "#888D9B",
-    bg6: darkMode ? "#1A2028" : "#6C7284",
+    // bg0: darkMode ? "#191B1F" : "#FFF",
+    // bg1: darkMode ? "#212429" : "#F7F8FA",
+    // bg2: darkMode ? "#2C2F36" : "#EDEEF2",
+    // bg3: darkMode ? "#40444F" : "#CED0D9",
+    // bg4: darkMode ? "#565A69" : "#888D9B",
+    // bg5: darkMode ? "#6C7284" : "#888D9B",
+    // bg6: darkMode ? "#1A2028" : "#6C7284",
+    mainBg: darkMode ? "#191B1F" : "#FFF",
 
     //specialty colors
     modalBG: darkMode ? "rgba(0,0,0,.425)" : "rgba(0,0,0,0.3)",

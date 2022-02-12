@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
     boxShadow: "none",
-    backgroundColor: theme.colors.bg0,
   },
   toolbar: {
     paddingLeft: theme.spacing(4),

@@ -13,7 +13,6 @@ import ResponsiveDialog from "../../AppComponents/ResponsiveDialog";
 import AccountDetails from "./AccountDetails";
 import Option from "./Option";
 import PendingView from "./PendingView";
-import { event } from "lib/gtag";
 import { switchNetworkMetamask } from "../../../ethereum/hooks/web3";
 import AppButton from "../../AppComponents/AppButton";
 
@@ -79,11 +78,6 @@ export default function WalletModal() {
       return true;
     });
     // // log selected wallet
-    event({
-      category: "Wallet",
-      action: "Change Wallet",
-      label: name,
-    });
     setPendingWallet(connector); // set wallet for pending view
     setWalletView(WALLET_VIEWS.PENDING);
 

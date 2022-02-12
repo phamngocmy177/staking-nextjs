@@ -11,7 +11,6 @@ import classnames from "classnames";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "block",
-    minHeight: "100vh",
   },
   background: {
     [theme.breakpoints.up("md")]: {

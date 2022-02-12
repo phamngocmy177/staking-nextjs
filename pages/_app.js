@@ -1,16 +1,15 @@
-/* eslint-disable no-unused-vars */
 import { ThemeProvider } from "@material-ui/styles";
 import { Web3ReactProvider } from "@web3-react/core";
+import { getLibrary } from "ethereum/utils";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import Router from "next/router";
 import { SnackbarProvider } from "notistack";
-import React, { useEffect } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import { useStore } from "react-redux";
 import { PersistGate } from "redux-persist/lib/integration/react";
 import wrapper from "state";
-import { getLibrary } from "ethereum/utils";
 import { useTheme } from "../theme";
 
 // const PageChange = dynamic(
@@ -19,6 +18,7 @@ import { useTheme } from "../theme";
 //     ssr: false,
 //   }
 // );
+import "./app.scss";
 const Web3ReactManager = dynamic(
   () => import("components/Web3Components/Web3ReactManager"),
   {
@@ -44,21 +44,21 @@ const Web3ProviderNetwork = dynamic(
 
 const PageChange = () => <div></div>;
 
-Router.events.on("routeChangeStart", (url) => {
-  document.body.classList.add("body-page-transition");
-  ReactDOM.render(
-    <PageChange path={url} />,
-    document.getElementById("page-transition")
-  );
-});
-Router.events.on("routeChangeComplete", () => {
-  ReactDOM.unmountComponentAtNode(document.getElementById("page-transition"));
-  document.body.classList.remove("body-page-transition");
-});
-Router.events.on("routeChangeError", () => {
-  ReactDOM.unmountComponentAtNode(document.getElementById("page-transition"));
-  document.body.classList.remove("body-page-transition");
-});
+// Router.events.on("routeChangeStart", (url) => {
+//   document.body.classList.add("body-page-transition");
+//   ReactDOM.render(
+//     <PageChange path={url} />,
+//     document.getElementById("page-transition")
+//   );
+// });
+// Router.events.on("routeChangeComplete", () => {
+//   ReactDOM.unmountComponentAtNode(document.getElementById("page-transition"));
+//   document.body.classList.remove("body-page-transition");
+// });
+// Router.events.on("routeChangeError", () => {
+//   ReactDOM.unmountComponentAtNode(document.getElementById("page-transition"));
+//   document.body.classList.remove("body-page-transition");
+// });
 
 function Updaters() {
   return (
@@ -84,7 +84,7 @@ const MyApp = ({ Component, pageProps }) => {
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
-        <title>keyTango</title>
+        <title>Staking App</title>
       </Head>
       <PersistGate persistor={store.__persistor} loading={<PageChange />}>
         <ThemeProvider theme={theme}>

@@ -39,8 +39,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   errorBorder: {
-    border: `1px solid ${theme.palette.dangerColor[0]}`,
-    color: theme.palette.dangerColor[0],
+    // border: `1px solid ${theme.palette.dangerColor[0]}`,
+    // color: theme.palette.dangerColor[0],
   },
   normalBorder: {
     color: "inherit",

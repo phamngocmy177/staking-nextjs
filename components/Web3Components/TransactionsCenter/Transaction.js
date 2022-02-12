@@ -31,8 +31,8 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 38,
     color: theme.palette.text.primary,
   },
-  error: { color: theme.palette.dangerColor[0] },
-  success: { color: theme.palette.successColor[0] },
+  // error: { color: theme.palette.dangerColor[0] },
+  // success: { color: theme.palette.successColor[0] },
   title: {
     color: "#4C4C66",
     fontSize: 14,

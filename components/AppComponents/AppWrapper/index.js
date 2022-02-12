@@ -7,10 +7,11 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    minHeight: "100%",
+    minHeight: "100vh",
     position: "relative",
+    backgroundColor: theme.colors.mainBg,
   },
 }));
 
