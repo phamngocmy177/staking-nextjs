@@ -10,9 +10,8 @@ import ReactDOM from "react-dom";
 import { useStore } from "react-redux";
 import { PersistGate } from "redux-persist/lib/integration/react";
 import wrapper from "state";
-// import { hotjar } from "react-hotjar";
 import { getLibrary } from "ethereum/utils";
-// import theme from "components/Theme";
+import { useTheme } from "../theme";
 
 // const PageChange = dynamic(
 //   () => import("components/DashboardComponents/PageChange/PageChange.js"),
@@ -33,6 +32,9 @@ const MulticallUpdater = dynamic(() => import("state/multicall/updater"), {
   ssr: false,
 });
 const TransactionUpdater = dynamic(() => import("state/transactions/updater"), {
+  ssr: false,
+});
+const UserUpdater = dynamic(() => import("state/user/updater"), {
   ssr: false,
 });
 const Web3ProviderNetwork = dynamic(
@@ -64,6 +66,7 @@ function Updaters() {
       <TransactionUpdater />
       <ApplicationUpdater />
       <MulticallUpdater />
+      <UserUpdater />
     </>
   );
 }
@@ -83,6 +86,7 @@ const MyApp = ({ Component, pageProps }) => {
   //   const wb = new Workbox("sw.js", { scope: "/" });
   //   wb.register();
   // }, []);
+  const theme = useTheme();
 
   return (
     <React.Fragment>
@@ -95,25 +99,25 @@ const MyApp = ({ Component, pageProps }) => {
       </Head>
       {/* <Intercom /> */}
       <PersistGate persistor={store.__persistor} loading={<PageChange />}>
-        {/* <ThemeProvider theme={theme}> */}
-        <Web3ReactProvider getLibrary={getLibrary}>
-          <Web3ProviderNetwork getLibrary={getLibrary}>
-            <SnackbarProvider
-              hideIconVariant
-              maxSnack={5}
-              anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-              autoHideDuration={10000}
-            >
-              <Web3ReactManager>
-                <Updaters />
-                <Layout>
-                  <Component {...pageProps} />
-                </Layout>
-              </Web3ReactManager>
-            </SnackbarProvider>
-          </Web3ProviderNetwork>
-        </Web3ReactProvider>
-        {/* </ThemeProvider> */}
+        <ThemeProvider theme={theme}>
+          <Web3ReactProvider getLibrary={getLibrary}>
+            <Web3ProviderNetwork getLibrary={getLibrary}>
+              <SnackbarProvider
+                hideIconVariant
+                maxSnack={5}
+                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+                autoHideDuration={10000}
+              >
+                <Web3ReactManager>
+                  <Updaters />
+                  <Layout>
+                    <Component {...pageProps} />
+                  </Layout>
+                </Web3ReactManager>
+              </SnackbarProvider>
+            </Web3ProviderNetwork>
+          </Web3ReactProvider>
+        </ThemeProvider>
       </PersistGate>
     </React.Fragment>
   );

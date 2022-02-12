@@ -18,6 +18,7 @@ import storage from "redux-persist/lib/storage";
 import application from "./application/reducer";
 import multicall from "./multicall/reducer";
 import transactions from "./transactions/reducer";
+import user from "./user/reducer";
 
 // const PERSISTED_KEYS = ["transactions"];
 
@@ -43,6 +44,7 @@ const rootReducer = combineReducers({
   application,
   transactions,
   multicall,
+  user,
 });
 
 const makeStore = ({ isServer }) => {
