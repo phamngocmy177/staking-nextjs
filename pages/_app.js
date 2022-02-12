@@ -75,17 +75,6 @@ const MyApp = ({ Component, pageProps }) => {
   const store = useStore((state) => state);
   const Layout = Component.layout || (({ children }) => <>{children}</>);
 
-  // useEffect(() => {
-  //   if (
-  //     !("serviceWorker" in navigator) ||
-  //     process.env.NODE_ENV !== "production"
-  //   ) {
-  //     return;
-  //   }
-
-  //   const wb = new Workbox("sw.js", { scope: "/" });
-  //   wb.register();
-  // }, []);
   const theme = useTheme();
 
   return (
@@ -97,7 +86,6 @@ const MyApp = ({ Component, pageProps }) => {
         />
         <title>keyTango</title>
       </Head>
-      {/* <Intercom /> */}
       <PersistGate persistor={store.__persistor} loading={<PageChange />}>
         <ThemeProvider theme={theme}>
           <Web3ReactProvider getLibrary={getLibrary}>

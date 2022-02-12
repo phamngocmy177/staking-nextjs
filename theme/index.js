@@ -1,7 +1,6 @@
+import { createTheme } from "@material-ui/core/styles";
+import { useMemo } from "react";
 import { useIsDarkMode } from "../state/user/hooks";
-import { createTheme, ThemeProvider } from "@material-ui/core/styles";
-import React, { useMemo } from "react";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 export const MEDIA_WIDTHS = {
   upToExtraSmall: 500,
@@ -92,7 +91,7 @@ export function colors(darkMode) {
 
 function theme(darkMode) {
   return {
-    ...colors(darkMode),
+    colors: colors(darkMode),
 
     grids: {
       sm: 8,
