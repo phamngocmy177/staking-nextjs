@@ -1,5 +1,5 @@
 import React from "react";
-import ResponsiveDialog from "../../KeytangoComponents/ResponsiveDialog";
+import ResponsiveDialog from "../../../AppComponents/ResponsiveDialog";
 import TransactionWrapper from "./TransactionWrapperv2";
 
 const DialogTransactionWrapper = ({

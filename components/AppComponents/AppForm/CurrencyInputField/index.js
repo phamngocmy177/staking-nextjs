@@ -5,7 +5,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Error from "@material-ui/icons/Error";
-import { darkColor } from "assets/jss/nextjs-material-dashboard-pro.js";
 import { prop } from "ramda";
 import React, { useState } from "react";
 import { replaceWhiteSpaces } from "../../../utils";
@@ -27,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
   balanceTypography: {
     fontSize: 16,
     fontWeight: 400,
-    color: darkColor[3],
     marginRight: theme.spacing(1.5),
     [theme.breakpoints.down("sm")]: {
       fontSize: 12,
@@ -35,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const KeytangoCurrencyInputField = ({
+const AppCurrencyInputField = ({
   input: { onChange, ...inputProps },
   meta: { touched, error, submitError, dirtySinceLastSubmit },
   children,
@@ -141,7 +139,7 @@ const KeytangoCurrencyInputField = ({
   );
 };
 
-KeytangoCurrencyInputField.defaultProps = {
+AppCurrencyInputField.defaultProps = {
   meta: {
     touched: false,
     error: null,
@@ -149,4 +147,4 @@ KeytangoCurrencyInputField.defaultProps = {
   },
 };
 
-export default KeytangoCurrencyInputField;
+export default AppCurrencyInputField;

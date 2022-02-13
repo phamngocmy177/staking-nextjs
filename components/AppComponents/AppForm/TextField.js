@@ -5,7 +5,7 @@ import Error from "@material-ui/icons/Error";
 import { replaceWhiteSpaces } from "../../utils";
 import { REQUIRED } from "./constants";
 
-const KeytangoTextField = ({
+const AppTextField = ({
   input: { onChange, ...inputProps },
   meta: { touched, error, submitError, dirtySinceLastSubmit },
   children,
@@ -79,7 +79,7 @@ const KeytangoTextField = ({
   );
 };
 
-KeytangoTextField.defaultProps = {
+AppTextField.defaultProps = {
   meta: {
     touched: false,
     error: null,
@@ -87,4 +87,4 @@ KeytangoTextField.defaultProps = {
   },
 };
 
-export default KeytangoTextField;
+export default AppTextField;

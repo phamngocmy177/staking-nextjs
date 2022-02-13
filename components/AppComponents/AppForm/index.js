@@ -6,9 +6,10 @@ import React from "react";
 import { Field, Form } from "react-final-form";
 import { mapIndexed } from "../../utils";
 import CurrencyInputField from "./CurrencyInputField/";
-import "./form-styles.css";
 import TextField from "./TextField";
+import AppButton from "../AppButton";
 
+// import "./form-styles.css";
 const formatsMap = {
   // checkbox: CheckboxField,
   // select: SelectField,
@@ -52,7 +53,7 @@ const ContentWrapper = ({ withGridWrapper, children }) =>
 
 const focusOnError = createDecorator();
 
-const KeytangoForm = ({
+const AppForm = ({
   submitAction,
   formFields,
   submitButtonText,
@@ -84,7 +85,7 @@ const KeytangoForm = ({
         {withoutSubmit || externalSubmit ? null : (
           <React.Fragment>
             {children}
-            <KeytangoButton
+            <AppButton
               success={success}
               successLabel={successText}
               loading={loading}
@@ -107,14 +108,14 @@ const KeytangoForm = ({
   </Form>
 );
 
-KeytangoForm.defaultProps = {
+AppForm.defaultProps = {
   formFields: [],
   withGridWrapper: false,
   submitFieldErrors: false,
   pristine: true,
 };
 
-KeytangoForm.propTypes = {
+AppForm.propTypes = {
   formFields: PropTypes.array,
   submitButtonText: PropTypes.string,
   children: PropTypes.element,
@@ -126,9 +127,9 @@ KeytangoForm.propTypes = {
   submitFieldErrors: PropTypes.bool,
 };
 
-export default KeytangoForm;
+export default AppForm;
 
-export { default as CheckboxField } from "./CheckboxField";
-export { default as NumberFormatField } from "./NumberFormatField";
-export { default as SelectField } from "./SelectField";
+// export { default as CheckboxField } from "./CheckboxField";
+// export { default as NumberFormatField } from "./NumberFormatField";
+// export { default as SelectField } from "./SelectField";
 export { default as TextField } from "./TextField";

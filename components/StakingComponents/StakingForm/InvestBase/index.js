@@ -95,7 +95,6 @@ const InvestBase = ({
   const approveLoading = approvalState === APPROVAL_STATE.PENDING;
 
   const handleSubmit = (values) => {
-
     onSubmit(values, selectedDepositAsset);
     setOpenTransactionModal(true);
   };
@@ -175,7 +174,7 @@ const InvestBase = ({
             gutterBottom
           ></AppButton>
         )}
-      </KeytangoForm>
+      </AppForm>
     </React.Fragment>
   );
 };

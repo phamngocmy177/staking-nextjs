@@ -5,6 +5,7 @@ import {
   MULTICALL_NETWORKS,
   MULTICALL_ABI,
 } from "../constants/multicall/index";
+import { CONTRACT_ABI } from "../artifacts";
 
 // returns null on errors
 export function useContract(
@@ -47,4 +48,12 @@ export function useMulticallContract() {
     MULTICALL_ABI,
     false
   );
+}
+
+export function useTokenContract(address) {
+  return useContract(address, CONTRACT_ABI.ERC20_ABI);
+}
+
+export function useStakingContract(address) {
+  return useContract(address, CONTRACT_ABI.STAKING_ABI);
 }
