@@ -13,12 +13,14 @@ export const programs = (chainId) => [
       symbol: "UNI",
       decimal: 18,
       name: "Uniswap",
+      maximumFractionDigits: 4,
     },
     rewardtAsset: {
       address: STAKING_REWARD_ADDRESS[chainId],
       symbol: "UNI",
       decimal: 18,
       name: "Uniswap",
+      maximumFractionDigits: 4,
     },
   },
 ];

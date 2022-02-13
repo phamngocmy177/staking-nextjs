@@ -3,18 +3,16 @@ import Box from "@material-ui/core/Box";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import classnames from "classnames";
 import { isNil, length } from "ramda";
 import React, { useState } from "react";
-import ResponsiveDialog from "../../ResponsiveDialog";
-import { mapIndexed } from "../../../utils";
-import { useTokenBalance } from "../../../../ethereum/hooks/useBalances";
 import Skeleton from "react-loading-skeleton";
+import { useTokenBalance } from "../../../../ethereum/hooks/useBalances";
+import ResponsiveDialog from "../../ResponsiveDialog";
 
 const useStyles = makeStyles((theme) => ({
   avatar: {

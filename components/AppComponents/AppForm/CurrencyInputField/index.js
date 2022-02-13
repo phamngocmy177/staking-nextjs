@@ -132,8 +132,11 @@ const AppCurrencyInputField = ({
         align="right"
         className={classes.balanceTypography}
         gutterBottom
-      >{`Your balance: ${new Intl.NumberFormat("en-US", {
-        maximumFractionDigits: selectedAsset?.isNative ? 3 : 0,
+      >{`Your balance: ~${new Intl.NumberFormat("en-US", {
+        maximumFractionDigits:
+          selectedAsset.maximumFractionDigits || selectedAsset?.isNative
+            ? 3
+            : 0,
       }).format(balance || 0)} ${selectedAsset?.symbol}`}</Typography>
     </React.Fragment>
   );
