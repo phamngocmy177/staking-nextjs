@@ -69,7 +69,7 @@ const AssetItem = ({ asset, onClick, AssetBalanceComponent }) => (
 );
 
 export const AssetSelectField = ({
-  depositAssets,
+  depositAsset,
   selectedAsset,
   onChange,
   labelTypographtClass,
@@ -79,7 +79,7 @@ export const AssetSelectField = ({
   ...others
 }) => {
   const classes = useStyles();
-  const hasMultipleDepositAssets = length(depositAssets) > 1;
+  // const hasMultipleDepositAssets = length(depositAssets) > 1;
   const [dialogOpen, setDialogOpen] = useState(null);
 
   const handleClickListItem = () => {
@@ -102,16 +102,10 @@ export const AssetSelectField = ({
         alignItems="center"
         justifyContent="space-between"
         width="100%"
-        onClick={
-          hasMultipleDepositAssets || AssetSelectComponent
-            ? handleClickListItem
-            : undefined
-        }
+        onClick={AssetSelectComponent ? handleClickListItem : undefined}
         className={classnames(
           containerClass,
-          hasMultipleDepositAssets || AssetSelectComponent
-            ? classes.pointer
-            : undefined
+          AssetSelectComponent ? classes.pointer : undefined
         )}
         {...others}
       >
@@ -132,7 +126,7 @@ export const AssetSelectField = ({
                 ? `${selectedAsset.symbol} `
                 : selectedAsset.symbol}
             </Typography>
-            {hasMultipleDepositAssets && <ArrowDropDownIcon />}
+            {/* {hasMultipleDepositAssets && <ArrowDropDownIcon />} */}
           </React.Fragment>
         )}
       </Box>
@@ -147,17 +141,17 @@ export const AssetSelectField = ({
         fixedHeight={false}
       >
         <List>
-          {mapIndexed(
-            (asset, index) => (
-              <AssetItem
-                key={index}
-                asset={asset}
-                onClick={() => handleMenuItemClick(asset)}
-                AssetBalanceComponent={AssetBalanceComponent}
-              />
-            ),
+          {/* {mapIndexed(
+            (asset, index) => ( */}
+          <AssetItem
+            // key={index}
+            asset={depositAsset}
+            onClick={() => handleMenuItemClick(depositAsset)}
+            AssetBalanceComponent={AssetBalanceComponent}
+          />
+          {/* ),
             depositAssets
-          )}
+          )} */}
         </List>
       </ResponsiveDialog>
     </React.Fragment>

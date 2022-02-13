@@ -56,7 +56,6 @@ const InvestBase = ({
   depositAssets,
   onSubmit,
   address,
-  programTitle,
   endTime,
   apy,
   FormTitleComponent,

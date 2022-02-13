@@ -6,11 +6,14 @@ import { useActiveWeb3React } from "../ethereum/hooks/web3";
 import { toWei, toPrice } from "../ethereum/utils/unitsHelper";
 import InvestBase from "../components/StakingComponents/StakingForm/InvestBase";
 import { STAKING_ADDRESS } from "../ethereum/constants/address";
+import { programs } from "../ethereum/constants/programs";
+import Grid from "@material-ui/core/Grid";
 
 function Staking() {
   const { account, chainId } = useActiveWeb3React();
   const bridgeContract = useStakingContract(STAKING_ADDRESS[chainId]);
   const [sendTransaction, transactionState] = useTransaction(bridgeContract);
+  const activePrograms = programs(chainId);
 
   const onSubmit = async ({ enterAmount }) => {
     const txParams = [
@@ -42,12 +45,18 @@ function Staking() {
 
   return (
     <Layout>
-      <InvestBase
-        onSubmit={onSubmit}
-        address={STAKING_ADDRESS[chainId]}
-        {...transactionState}
-        // programTitle={programTitle}
-      />
+      <Grid container>
+        {activePrograms.map((program) => (
+          <Grid item lg={4} key={program.address}>
+            <InvestBase
+              onSubmit={onSubmit}
+              {...program}
+              {...transactionState}
+              // programTitle={programTitle}
+            />
+          </Grid>
+        ))}
+      </Grid>
     </Layout>
   );
 }
