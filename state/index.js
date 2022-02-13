@@ -61,7 +61,7 @@ const makeStore = ({ isServer }) => {
     const persistConfig = {
       key: "root",
       version: 1,
-      whitelist: ["transactions"],
+      whitelist: ["transactions", "user"],
       storage,
     };
 
