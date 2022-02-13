@@ -35,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = () => {
   const classes = useStyles();
-  // eslint-disable-next-line no-unused-vars
   const [darkMode, toggleSetDarkMode] = useDarkModeManager();
 
   return (
@@ -45,18 +44,21 @@ const Header = () => {
       color="transparent"
     >
       <Toolbar classes={{ root: classnames(classes.root, classes.toolbar) }}>
-        <Link href={"/"} passHref>
-          <Box style={{ cursor: "pointer" }}>
-            <Image
-              src={logo}
-              alt="logo"
-              height={100}
-              width={"100%"}
-              objectFit="contain"
-            />
-          </Box>
-        </Link>
-        <HeaderLinksSection headerLinks={HEADER_LINKS} />
+        <Box display="flex" alignItems="center">
+          <Link href={"/"} passHref>
+            <Box style={{ cursor: "pointer" }}>
+              <Image
+                src={logo}
+                alt="logo"
+                height={100}
+                width={"100%"}
+                objectFit="contain"
+              />
+            </Box>
+          </Link>
+          <HeaderLinksSection headerLinks={HEADER_LINKS} />
+        </Box>
+
         <Box display="flex" alignItems="center">
           <TransactionsCenter />
           <Web3StatusButton />
