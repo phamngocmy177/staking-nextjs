@@ -111,7 +111,7 @@ export const switchNetworkMetamask = async () => {
   try {
     await window.ethereum.request({
       method: "wallet_switchEthereumChain",
-      params: [{ chainId: "0x1" }],
+      params: [{ chainId: "0x3" }],
     });
   } catch (error) {
     console.log("Switch network error", error);

@@ -195,7 +195,7 @@ export default function WalletModal() {
               {isMetamask && (
                 <AppButton
                   onClick={switchNetworkMetamask}
-                  label="Switch to Ethereum Mainnet"
+                  label="Switch to Ethereum Ropsten"
                 ></AppButton>
               )}
             </div>

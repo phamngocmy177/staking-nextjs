@@ -10,6 +10,7 @@
     "@ethersproject/contracts": "^5.5.0",
     "@ethersproject/providers": "^5.5.3",
     "@ethersproject/solidity": "^5.5.0",
+    "@ethersproject/units": "^5.5.0",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
     "@metamask/jazzicon": "^2.0.0",
@@ -21,6 +22,7 @@
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
     "classnames": "^2.3.1",
+    "final-form-focus": "^1.1.2",
     "next": "latest",
     "next-compose-plugins": "^2.2.1",
     "next-images": "^1.8.4",
@@ -31,6 +33,7 @@
     "ramda": "^0.28.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-final-form": "^6.5.8",
     "react-redux": "^7.2.6",
     "redux-persist": "^6.0.0",
     "web3": "^1.7.0"

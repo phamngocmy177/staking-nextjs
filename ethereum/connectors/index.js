@@ -5,7 +5,6 @@ import { NetworkConnector } from "./NetworkConnector";
 import { getLibrary } from "../utils";
 
 const INFURA_KEY = process.env.NEXT_PUBLIC_INFURA_KEY;
-// const WALLETCONNECT_BRIDGE_URL = process.env.REACT_APP_WALLETCONNECT_BRIDGE_URL;
 
 if (typeof INFURA_KEY === "undefined") {
   throw new Error(
@@ -22,11 +21,11 @@ const NETWORK_URLS = {
 };
 
 const SUPPORTED_CHAIN_IDS = [
-  SUPPORTED_CHAINS_IDS.MAINNET,
+  // SUPPORTED_CHAINS_IDS.MAINNET,
   // SUPPORTED_CHAINS_IDS.KOVAN,
   // SUPPORTED_CHAINS_IDS.GANACHE,
   SUPPORTED_CHAINS_IDS.ROPSTEN,
-  SUPPORTED_CHAINS_IDS.RINKEBY,
+  // SUPPORTED_CHAINS_IDS.RINKEBY,
 ];
 
 export const network = new NetworkConnector({

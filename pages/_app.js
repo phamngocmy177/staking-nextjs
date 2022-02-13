@@ -3,15 +3,12 @@ import { Web3ReactProvider } from "@web3-react/core";
 import { getLibrary } from "ethereum/utils";
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import Router from "next/router";
 import { SnackbarProvider } from "notistack";
 import React from "react";
-import ReactDOM from "react-dom";
 import { useStore } from "react-redux";
 import { PersistGate } from "redux-persist/lib/integration/react";
 import wrapper from "state";
 import { useTheme } from "../theme";
-
 // const PageChange = dynamic(
 //   () => import("components/DashboardComponents/PageChange/PageChange.js"),
 //   {
@@ -19,6 +16,7 @@ import { useTheme } from "../theme";
 //   }
 // );
 import "./app.scss";
+
 const Web3ReactManager = dynamic(
   () => import("components/Web3Components/Web3ReactManager"),
   {

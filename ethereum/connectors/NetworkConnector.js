@@ -2,7 +2,7 @@ import { AbstractConnector } from "@web3-react/abstract-connector";
 import invariant from "tiny-invariant";
 
 class RequestError extends Error {
-  constructor(message, code, data) {
+  constructor(message) {
     super(message);
   }
 }
