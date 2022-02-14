@@ -11,8 +11,18 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { MOBILE_QUERY } from "../components/utils/responsive";
 import LPTokensGrid from "../components/PortfolioComponents/Grids/LPTokensGrid";
 import RegularTokensGrid from "../components/PortfolioComponents/Grids/RegularTokensGrid";
+import Container from "@material-ui/core/Container";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    padding: theme.spacing(4, 0, 0, 0),
+  },
+}));
 
 function Portfolio() {
+  const classes = useStyles();
+
   const userTokens = useUserTokens();
   const isMobile = useMediaQuery(MOBILE_QUERY);
   const groupedData = groupBy(propOr(TOKEN_CLASSES.TOKEN, "class"), userTokens);
@@ -21,8 +31,10 @@ function Portfolio() {
 
   return (
     <Layout>
-      <RegularTokensGrid rows={defaultTokens} isMobile={isMobile} />
-      {/* <LPTokensGrid rows={lpTokens} isMobile={isMobile} /> */}
+      <Container maxWidth="lg" className={classes.container}>
+        <RegularTokensGrid rows={defaultTokens} isMobile={isMobile} />
+        {/* <LPTokensGrid rows={lpTokens} isMobile={isMobile} /> */}
+      </Container>
     </Layout>
   );
 }
