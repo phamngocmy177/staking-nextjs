@@ -34,6 +34,7 @@ export function colors(darkMode) {
     white,
     black,
 
+    primary: darkMode ? "#EB2C63" : "#EB2C63",
     // text
     text1: darkMode ? "#FFFFFF" : "#000000",
     text2: darkMode ? "#C3C5CB" : "#565A69",
