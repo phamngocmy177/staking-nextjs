@@ -9,6 +9,7 @@ import { useStore } from "react-redux";
 import { PersistGate } from "redux-persist/lib/integration/react";
 import wrapper from "state";
 import { useTheme } from "../theme";
+import { MoralisProvider } from "react-moralis";
 // const PageChange = dynamic(
 //   () => import("components/DashboardComponents/PageChange/PageChange.js"),
 //   {
@@ -69,6 +70,9 @@ function Updaters() {
   );
 }
 
+const APP_ID = process.env.NEXT_PUBLIC_MORALIS_APPLICATION_ID;
+const SERVER_URL = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
+
 const MyApp = ({ Component, pageProps }) => {
   const store = useStore((state) => state);
   const Layout = Component.layout || (({ children }) => <>{children}</>);
@@ -85,25 +89,27 @@ const MyApp = ({ Component, pageProps }) => {
         <title>Staking App</title>
       </Head>
       <PersistGate persistor={store.__persistor} loading={<PageChange />}>
-        <ThemeProvider theme={theme}>
-          <Web3ReactProvider getLibrary={getLibrary}>
-            <Web3ProviderNetwork getLibrary={getLibrary}>
-              <SnackbarProvider
-                hideIconVariant
-                maxSnack={5}
-                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-                autoHideDuration={10000}
-              >
-                <Web3ReactManager>
-                  <Updaters />
-                  <Layout>
-                    <Component {...pageProps} />
-                  </Layout>
-                </Web3ReactManager>
-              </SnackbarProvider>
-            </Web3ProviderNetwork>
-          </Web3ReactProvider>
-        </ThemeProvider>
+        <MoralisProvider appId={APP_ID} serverUrl={SERVER_URL}>
+          <ThemeProvider theme={theme}>
+            <Web3ReactProvider getLibrary={getLibrary}>
+              <Web3ProviderNetwork getLibrary={getLibrary}>
+                <SnackbarProvider
+                  hideIconVariant
+                  maxSnack={5}
+                  anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+                  autoHideDuration={10000}
+                >
+                  <Web3ReactManager>
+                    <Updaters />
+                    <Layout>
+                      <Component {...pageProps} />
+                    </Layout>
+                  </Web3ReactManager>
+                </SnackbarProvider>
+              </Web3ProviderNetwork>
+            </Web3ReactProvider>
+          </ThemeProvider>
+        </MoralisProvider>
       </PersistGate>
     </React.Fragment>
   );
