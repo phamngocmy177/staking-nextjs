@@ -8,11 +8,13 @@ const classifyTokens = (token) => {
   if (isUniswapLP(token) || isSushiswapLP(token)) {
     return {
       ...token,
+      address: token.token_address,
       class: TOKEN_CLASSES.LP_TOKEN,
     };
   }
   return {
     ...token,
+    address: token.token_address,
     class: TOKEN_CLASSES.TOKEN,
   };
 };
@@ -29,6 +31,7 @@ export const useUserTokens = () => {
   const { data } = useSWR(address, fetcher);
   if (data) {
     const classifiedTokens = data?.map((item) => classifyTokens(item));
+
     return classifiedTokens;
   }
   return [];
