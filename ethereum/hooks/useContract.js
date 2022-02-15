@@ -57,3 +57,7 @@ export function useTokenContract(address) {
 export function useStakingContract(address) {
   return useContract(address, CONTRACT_ABI.STAKING_ABI);
 }
+
+export function usePairContract(address) {
+  return useContract(address, CONTRACT_ABI.UNIv2_ABI);
+}
