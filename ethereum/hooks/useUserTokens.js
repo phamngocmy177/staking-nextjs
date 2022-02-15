@@ -3,19 +3,18 @@ import useSWR from "swr";
 import { useActiveWeb3React } from "..//hooks/web3";
 import { TOKEN_CLASSES } from "../constants/tokens";
 import { isUniswapLP, isSushiswapLP } from "../hooks/tokenClassification";
+import { parseByDecimals } from "../utils/unitsHelper";
 
 const classifyTokens = (token) => {
+  let tokenClass = TOKEN_CLASSES.TOKEN;
   if (isUniswapLP(token) || isSushiswapLP(token)) {
-    return {
-      ...token,
-      address: token.token_address,
-      class: TOKEN_CLASSES.LP_TOKEN,
-    };
+    tokenClass = TOKEN_CLASSES.LP_TOKEN;
   }
   return {
     ...token,
     address: token.token_address,
-    class: TOKEN_CLASSES.TOKEN,
+    balance: parseByDecimals(token.decimals, token.balance),
+    class: tokenClass,
   };
 };
 
@@ -29,6 +28,7 @@ export const useUserTokens = () => {
     await Moralis.Web3API.account.getTokenBalances(options);
   const address = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
   const { data } = useSWR(address, fetcher);
+
   if (data) {
     const classifiedTokens = data?.map((item) => classifyTokens(item));
 
