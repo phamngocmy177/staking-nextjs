@@ -1,11 +1,12 @@
 import { isNil, not, path, pipe } from "ramda";
-import { uniswapRopstenClients } from "./clients";
+import { uniswapClient } from "./clients";
 
-export const getUniswapLPTokenValue = async (tokenAddress) => {
-  const pairValue = await uniswapRopstenClients
-    .request(
+export const getUniswapLPTokenValue = async (tokenAddress, chainId) => {
+  const pairValue = await uniswapClient[chainId]
+    ?.request(
       `query {
             pair(id: "${tokenAddress}") {
+              id
               token0 {
                 name
                 symbol

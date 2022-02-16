@@ -18,14 +18,11 @@ const useStyles = makeStyles((theme) => ({
 
 function Portfolio() {
   const classes = useStyles();
-
-  const userTokens = useUserTokens();
   const isMobile = useMediaQuery(MOBILE_QUERY);
+  const userTokens = useUserTokens();
 
-  const groupedData = groupBy(propOr(TOKEN_CLASSES.TOKEN, "class"), userTokens);
-
-  const defaultTokens = groupedData[TOKEN_CLASSES.TOKEN];
-  const lpTokens = groupedData[TOKEN_CLASSES.LP_TOKEN];
+  const defaultTokens = userTokens[TOKEN_CLASSES.TOKEN];
+  const lpTokens = userTokens[TOKEN_CLASSES.LP_TOKEN];
 
   return (
     <Layout>
