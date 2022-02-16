@@ -3,3 +3,6 @@ export const TOKEN_CLASSES = {
   TOKEN: "TOKEN",
   SYNTHETIC_TOKEN: "SYNTHETIC_TOKEN",
 };
+
+export const TOKEN_LOGO_SOURCE =
+  "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets";
