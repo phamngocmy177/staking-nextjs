@@ -15,6 +15,10 @@ module.exports = withPlugins([], {
         source: "/assets/:path*",
         destination: "https://api.coingecko.com/api/v3/coins/:path*", // Proxy to Backend
       },
+      {
+        source: "/images/:path*",
+        destination: "https://ethplorer.io/images/:path*", // Proxy to Backend
+      },
     ];
   },
 

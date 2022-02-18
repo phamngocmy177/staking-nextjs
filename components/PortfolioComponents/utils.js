@@ -9,6 +9,8 @@ import {
   path,
 } from "ramda";
 
+const tokenUsdRatePath = ['price', 'rate'];
+
 export const filterNulls = filter(identity);
 export const filterByValue = filter(propSatisfies((x) => x > 0, "value"));
 
@@ -17,6 +19,7 @@ export const sumListValues = pipe(
   filter(identity),
   reduce(add, 0)
 );
+
 export const getSymbol = path(["symbol"]);
 export const getToken0 = path(["token0"]);
 export const getToken1 = path(["token1"]);
