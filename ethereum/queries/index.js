@@ -10,6 +10,7 @@ export const getUniswapLPTokenValue = async (tokenAddress) => {
               token0 {
                 name
                 symbol
+                id
               }
               token1 {
                 name

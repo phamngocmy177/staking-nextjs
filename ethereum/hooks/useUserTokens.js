@@ -7,6 +7,7 @@ import { TOKEN_CLASSES } from "../constants/tokens";
 import { isSushiswapLP, isUniswapLP } from "../hooks/tokenClassification";
 import { getUniswapLPTokenValue } from "../queries";
 import { parseByDecimals } from "../utils/unitsHelper";
+import { BigNumber } from "@ethersproject/bignumber";
 
 const classifyTokens = (token) => {
   let tokenClass = TOKEN_CLASSES.TOKEN;
@@ -41,13 +42,16 @@ export const useUserLpTokens = (lpTokens, chainId) => {
 
   return data?.map((item, index) => ({
     ...item,
-    address: item?.id,
     ...lpTokens[index],
+    price: item.reserveUSD / item.totalSupply,
+    value: (item.reserveUSD / item.totalSupply) * lpTokens[index].balance,
+    address: item?.id,
   }));
 };
 
 export const useUserTokens = () => {
   const { account, chainId } = useActiveWeb3React();
+
   const params = useMemo(() => ({ account }), [account]);
   const fetcher = async () =>
     await axios
@@ -73,6 +77,7 @@ export const useUserTokens = () => {
   const lpTokens = groupedData[TOKEN_CLASSES.LP_TOKEN];
 
   const lps = useUserLpTokens(lpTokens, chainId);
+  console.log("lps", lps);
   return {
     [TOKEN_CLASSES.TOKEN]: defaultTokens,
     [TOKEN_CLASSES.LP_TOKEN]: lps,
