@@ -9,7 +9,7 @@ import {
   path,
 } from "ramda";
 
-const tokenUsdRatePath = ['price', 'rate'];
+export const tokenUsdRatePath = ["price", "rate"];
 
 export const filterNulls = filter(identity);
 export const filterByValue = filter(propSatisfies((x) => x > 0, "value"));

@@ -1,10 +1,18 @@
 import { pathEq, pathSatisfies, includes, toLower, map } from "ramda";
+import { LP_TOKEN_PLATFORM } from "../constants/tokens";
+
 const tokenNamePath = ["tokenInfo", "name"];
 const addressPath = ["address"];
 
-export const isUniswapv2LP = pathEq(tokenNamePath, "Uniswap V2");
-export const isUniswapv3LP = pathEq(tokenNamePath, "Uniswap V3");
-export const isSushiswapLP = pathEq(tokenNamePath, "SushiSwap LP Token");
+export const isUniswapv2LP = pathEq(
+  tokenNamePath,
+  LP_TOKEN_PLATFORM.UNISWAP_V2
+);
+export const isUniswapv3LP = pathEq(
+  tokenNamePath,
+  LP_TOKEN_PLATFORM.UNISWAP_V3
+);
+export const isSushiswapLP = pathEq(tokenNamePath, LP_TOKEN_PLATFORM.SUSHISWAP);
 
 export const isCToken = pathSatisfies(
   (address) =>

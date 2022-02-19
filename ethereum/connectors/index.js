@@ -2,6 +2,16 @@ import { InjectedConnector } from "@web3-react/injected-connector";
 import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
 import { SUPPORTED_CHAINS_IDS } from "../constants/chains";
 import { NetworkConnector } from "./NetworkConnector";
+import { WalletLinkConnector } from "@web3-react/walletlink-connector";
+// import { LedgerConnector } from '@web3-react/ledger-connector';
+// import { TrezorConnector } from '@web3-react/trezor-connector';
+// import { FrameConnector } from '@web3-react/frame-connector';
+// import { FortmaticConnector } from '@web3-react/fortmatic-connector';
+// import { PortisConnector } from '@web3-react/portis-connector';
+// import { SquarelinkConnector } from '@web3-react/squarelink-connector';
+// import { TorusConnector } from '@web3-react/torus-connector';
+// import { AuthereumConnector } from '@web3-react/authereum-connector';
+
 import { getLibrary } from "../utils";
 
 const INFURA_KEY = process.env.NEXT_PUBLIC_INFURA_KEY;
@@ -48,4 +58,9 @@ export const walletconnect = new WalletConnectConnector({
   bridge: "https://bridge.walletconnect.org",
   qrcode: true,
   pollingInterval: 15000,
+});
+
+export const walletlink = new WalletLinkConnector({
+  url: NETWORK_URLS,
+  appName: "Staking App",
 });

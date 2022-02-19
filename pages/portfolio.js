@@ -2,7 +2,6 @@ import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Layout from "layouts/Layout";
-import { groupBy, propOr } from "ramda";
 import React from "react";
 import LPTokensGrid from "../components/PortfolioComponents/Grids/LPTokensGrid";
 import RegularTokensGrid from "../components/PortfolioComponents/Grids/RegularTokensGrid";
