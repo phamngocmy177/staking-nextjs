@@ -3,18 +3,21 @@ import { groupBy, path, propOr } from "ramda";
 import { useMemo } from "react";
 import useSWR from "swr";
 import { useActiveWeb3React } from "..//hooks/web3";
-import { TOKEN_CLASSES } from "../constants/tokens";
-import { isSushiswapLP, isUniswapLP } from "../hooks/tokenClassification";
-import { getUniswapLPTokenValue } from "../queries";
+import { LP_TOKEN_PLATFORM, TOKEN_CLASSES } from "../constants/tokens";
+import { isUniswapv2LP, isUniswapv3LP } from "../hooks/tokenClassification";
+import { getUniswapv2LPTokenValue, getUniswapv3LPTokenValue } from "../queries";
 import { parseByDecimals } from "../utils/unitsHelper";
-import { BigNumber } from "@ethersproject/bignumber";
 
 const classifyTokens = (token) => {
   let tokenClass = TOKEN_CLASSES.TOKEN;
   let platform;
-  if (isUniswapLP(token) || isSushiswapLP(token)) {
+  if (isUniswapv2LP(token)) {
     tokenClass = TOKEN_CLASSES.LP_TOKEN;
-    platform = isUniswapLP(token) ? "Uniswap v2" : null;
+    platform = LP_TOKEN_PLATFORM.UNISWAP_V2;
+  }
+  if (isUniswapv3LP(token)) {
+    tokenClass = TOKEN_CLASSES.LP_TOKEN;
+    platform = LP_TOKEN_PLATFORM.UNISWAP_V3;
   }
   const usdtRate = path(["tokenInfo", "price", "rate"], token);
 
@@ -31,12 +34,19 @@ const classifyTokens = (token) => {
   };
 };
 
-export const useUserLpTokens = (lpTokens, chainId) => {
-  function fetcher(...urls) {
-    const f = (u) => getUniswapLPTokenValue(u, chainId);
-    return Promise.all(urls.map(f));
+export const useUserLpTokens = (lpTokens) => {
+  function fetcher(...tokens) {
+    const f = (item) => {
+      if (item.platform === LP_TOKEN_PLATFORM.UNISWAP_V2) {
+        return getUniswapv2LPTokenValue(item.address);
+      }
+      if (item.platform === LP_TOKEN_PLATFORM.UNISWAP_V2) {
+        return getUniswapv3LPTokenValue(item.address);
+      }
+    };
+    return Promise.all(tokens.map(f));
   }
-  const lpAddresses = lpTokens?.map((item) => item.address);
+  const lpAddresses = lpTokens;
   const address = lpAddresses;
   const { data } = useSWR(address, fetcher);
 
@@ -50,7 +60,7 @@ export const useUserLpTokens = (lpTokens, chainId) => {
 };
 
 export const useUserTokens = () => {
-  const { account, chainId } = useActiveWeb3React();
+  const { account } = useActiveWeb3React();
 
   const params = useMemo(() => ({ account }), [account]);
   const fetcher = async () =>
@@ -76,8 +86,8 @@ export const useUserTokens = () => {
   const defaultTokens = groupedData[TOKEN_CLASSES.TOKEN];
   const lpTokens = groupedData[TOKEN_CLASSES.LP_TOKEN];
 
-  const lps = useUserLpTokens(lpTokens, chainId);
-  console.log("lps", lps);
+  const lps = useUserLpTokens(lpTokens);
+
   return {
     [TOKEN_CLASSES.TOKEN]: defaultTokens,
     [TOKEN_CLASSES.LP_TOKEN]: lps,

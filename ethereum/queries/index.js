@@ -1,29 +1,36 @@
 import { isNil, not, path, pipe } from "ramda";
-import { uniswapMainnetClients } from "./clients";
+import { uniswapMainnetv2Clients, uniswapMainnetv3Clients } from "./clients";
 
-export const getUniswapLPTokenValue = async (tokenAddress) => {
-  const pairValue = await uniswapMainnetClients
-    ?.request(
-      `query {
-            pair(id: "${tokenAddress}") {
-              id
-              token0 {
-                name
-                symbol
-                id
-              }
-              token1 {
-                name
-                symbol
-                id
-              }
-              totalSupply
-              reserveUSD
-              reserve0
-              reserve1
-            }
-          }`
-    )
+const lpTokenQuery = (tokenAddress) => `query {
+  pair(id: "${tokenAddress}") {
+    id
+    token0 {
+      name
+      symbol
+      id
+    }
+    token1 {
+      name
+      symbol
+      id
+    }
+    totalSupply
+    reserveUSD
+    reserve0
+    reserve1
+  }
+}`;
+export const getUniswapv2LPTokenValue = async (tokenAddress) => {
+  const pairValue = await uniswapMainnetv2Clients
+    ?.request(lpTokenQuery(tokenAddress))
+    .then(path(["pair"]));
+
+  return pairValue;
+};
+
+export const getUniswapv3LPTokenValue = async (tokenAddress) => {
+  const pairValue = await uniswapMainnetv3Clients
+    ?.request(lpTokenQuery(tokenAddress))
     .then(path(["pair"]));
 
   return pairValue;

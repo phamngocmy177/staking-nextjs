@@ -2,8 +2,8 @@ import { pathEq, pathSatisfies, includes, toLower, map } from "ramda";
 const tokenNamePath = ["tokenInfo", "name"];
 const addressPath = ["address"];
 
-export const isUniswapLP = pathEq(tokenNamePath, "Uniswap V2");
-
+export const isUniswapv2LP = pathEq(tokenNamePath, "Uniswap V2");
+export const isUniswapv3LP = pathEq(tokenNamePath, "Uniswap V3");
 export const isSushiswapLP = pathEq(tokenNamePath, "SushiSwap LP Token");
 
 export const isCToken = pathSatisfies(
