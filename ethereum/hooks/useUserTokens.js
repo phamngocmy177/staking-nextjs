@@ -4,8 +4,16 @@ import { useMemo } from "react";
 import useSWR from "swr";
 import { useActiveWeb3React } from "..//hooks/web3";
 import { LP_TOKEN_PLATFORM, TOKEN_CLASSES } from "../constants/tokens";
-import { isUniswapv2LP, isUniswapv3LP } from "../hooks/tokenClassification";
-import { getUniswapv2LPTokenValue, getUniswapv3LPTokenValue } from "../queries";
+import {
+  isUniswapv2LP,
+  isUniswapv3LP,
+  isSushiswapLP,
+} from "../hooks/tokenClassification";
+import {
+  getUniswapv2LPTokenValue,
+  getUniswapv3LPTokenValue,
+  getSushiswapLPTokenValue,
+} from "../queries";
 import { parseByDecimals } from "../utils/unitsHelper";
 
 const classifyTokens = (token) => {
@@ -18,6 +26,10 @@ const classifyTokens = (token) => {
   if (isUniswapv3LP(token)) {
     tokenClass = TOKEN_CLASSES.LP_TOKEN;
     platform = LP_TOKEN_PLATFORM.UNISWAP_V3;
+  }
+  if (isSushiswapLP(token)) {
+    tokenClass = TOKEN_CLASSES.LP_TOKEN;
+    platform = LP_TOKEN_PLATFORM.SUSHISWAP;
   }
   const usdtRate = path(["tokenInfo", "price", "rate"], token);
 
@@ -40,8 +52,11 @@ export const useUserLpTokens = (lpTokens) => {
       if (item.platform === LP_TOKEN_PLATFORM.UNISWAP_V2) {
         return getUniswapv2LPTokenValue(item.address);
       }
-      if (item.platform === LP_TOKEN_PLATFORM.UNISWAP_V2) {
+      if (item.platform === LP_TOKEN_PLATFORM.UNISWAP_V3) {
         return getUniswapv3LPTokenValue(item.address);
+      }
+      if (item.platform === LP_TOKEN_PLATFORM.SUSHISWAP) {
+        return getSushiswapLPTokenValue(item.address);
       }
     };
     return Promise.all(tokens.map(f));

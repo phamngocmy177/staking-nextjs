@@ -1,11 +1,11 @@
+import axios from "axios";
 import { GraphQLClient } from "graphql-request";
 import {
-  UNISWAP_ROPSTEN_URL,
+  SUSHISWAP_MAINNET_URL,
   UNISWAP_MAINNET_V2_URL,
   UNISWAP_MAINNET_V3_URL,
+  UNISWAP_ROPSTEN_URL,
 } from "./constants";
-import { SUPPORTED_CHAINS_IDS } from "../constants/chains";
-import axios from "axios";
 
 export const uniswapRopstenClients = new GraphQLClient(UNISWAP_ROPSTEN_URL, {
   timeout: 15000,
@@ -25,11 +25,11 @@ export const uniswapMainnetv3Clients = new GraphQLClient(
   }
 );
 
-export const uniswapClient = {
-  [SUPPORTED_CHAINS_IDS.ROPSTEN]: uniswapRopstenClients,
-  [SUPPORTED_CHAINS_IDS.MAINNET]: uniswapMainnetv2Clients,
-};
-
+export const sushiswapMainnetClients = new GraphQLClient(
+  SUSHISWAP_MAINNET_URL,
+  { timeout: 15000 }
+);
+sushiswapMainnetClients;
 export const ethPlorerClient = axios.create({
   baseURL: "https://api.ethplorer.io",
 });

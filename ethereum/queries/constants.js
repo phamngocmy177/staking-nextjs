@@ -4,3 +4,5 @@ export const UNISWAP_MAINNET_V2_URL =
   "https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v2";
 export const UNISWAP_MAINNET_V3_URL =
   "https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3";
+export const SUSHISWAP_MAINNET_URL =
+  "https://api.thegraph.com/subgraphs/name/sushiswap/exchange";

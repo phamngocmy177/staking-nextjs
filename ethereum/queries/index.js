@@ -1,5 +1,9 @@
 import { isNil, not, path, pipe } from "ramda";
-import { uniswapMainnetv2Clients, uniswapMainnetv3Clients } from "./clients";
+import {
+  sushiswapMainnetClients,
+  uniswapMainnetv2Clients,
+  uniswapMainnetv3Clients,
+} from "./clients";
 
 const lpTokenQuery = (tokenAddress) => `query {
   pair(id: "${tokenAddress}") {
@@ -30,6 +34,14 @@ export const getUniswapv2LPTokenValue = async (tokenAddress) => {
 
 export const getUniswapv3LPTokenValue = async (tokenAddress) => {
   const pairValue = await uniswapMainnetv3Clients
+    ?.request(lpTokenQuery(tokenAddress))
+    .then(path(["pair"]));
+
+  return pairValue;
+};
+
+export const getSushiswapLPTokenValue = async (tokenAddress) => {
+  const pairValue = await sushiswapMainnetClients
     ?.request(lpTokenQuery(tokenAddress))
     .then(path(["pair"]));
 
