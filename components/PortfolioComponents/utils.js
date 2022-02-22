@@ -26,3 +26,5 @@ export const getToken1 = path(["token1"]);
 export const getPlatform = path(["platform"]);
 export const getImage = path(["image"]);
 export const getBalance = path(["balance"]);
+
+export const tokenIsETH = (token) => token.address === "eth";

@@ -1,19 +1,18 @@
-import axios from "axios";
 import { groupBy, path, propOr } from "ramda";
 import { useMemo } from "react";
 import useSWR from "swr";
 import { useActiveWeb3React } from "..//hooks/web3";
 import { LP_TOKEN_PLATFORM, TOKEN_CLASSES } from "../constants/tokens";
 import {
+  isSushiswapLP,
   isUniswapv2LP,
   isUniswapv3LP,
-  isSushiswapLP,
 } from "../hooks/tokenClassification";
 import {
+  fetchAddressInfo,
+  getSushiswapLPTokenValue,
   getUniswapv2LPTokenValue,
   getUniswapv3LPTokenValue,
-  getSushiswapLPTokenValue,
-  fetchAddressInfo,
 } from "../queries";
 import { parseByDecimals } from "../utils/unitsHelper";
 
