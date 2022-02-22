@@ -29,7 +29,7 @@ export const sushiswapMainnetClients = new GraphQLClient(
   SUSHISWAP_MAINNET_URL,
   { timeout: 15000 }
 );
-sushiswapMainnetClients;
+
 export const ethPlorerClient = axios.create({
   baseURL: "https://api.ethplorer.io",
 });

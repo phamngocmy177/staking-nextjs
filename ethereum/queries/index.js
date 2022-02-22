@@ -3,6 +3,7 @@ import {
   sushiswapMainnetClients,
   uniswapMainnetv2Clients,
   uniswapMainnetv3Clients,
+  ethPlorerClient,
 } from "./clients";
 
 const lpTokenQuery = (tokenAddress) => `query {
@@ -47,5 +48,19 @@ export const getSushiswapLPTokenValue = async (tokenAddress) => {
 
   return pairValue;
 };
+
+export const fetchTokenInfo = async (address) =>
+  await ethPlorerClient
+    .get(
+      `/getTokenInfo/${address}?apiKey=${process.env.NEXT_PUBLIC_ETHPLORER_KEY}`
+    )
+    .then(path["data"]);
+
+export const fetchAddressInfo = async (account) =>
+  await ethPlorerClient
+    .get(
+      `/getAddressInfo/${account}?apiKey=${process.env.NEXT_PUBLIC_ETHPLORER_KEY}`
+    )
+    .then(path["data"]);
 
 export const tokenExists = pipe(path(["tokens", 0, "name"]), isNil, not);

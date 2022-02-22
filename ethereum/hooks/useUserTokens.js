@@ -13,6 +13,7 @@ import {
   getUniswapv2LPTokenValue,
   getUniswapv3LPTokenValue,
   getSushiswapLPTokenValue,
+  fetchAddressInfo,
 } from "../queries";
 import { parseByDecimals } from "../utils/unitsHelper";
 
@@ -78,15 +79,7 @@ export const useUserTokens = () => {
   const { account } = useActiveWeb3React();
 
   const params = useMemo(() => ({ account }), [account]);
-  const fetcher = async () =>
-    await axios
-      .create({
-        baseURL: "https://api.ethplorer.io",
-      })
-      .get(
-        `https://api.ethplorer.io/getAddressInfo/${account}?apiKey=${process.env.NEXT_PUBLIC_ETHPLORER_KEY}`
-      )
-      .then(path(["data"]));
+  const fetcher = async () => await fetchAddressInfo(account);
 
   const { data } = useSWR(["https://api.ethplorer.io", params], fetcher);
 
