@@ -3,11 +3,7 @@ import { useMemo } from "react";
 import useSWR from "swr";
 import { useActiveWeb3React } from "..//hooks/web3";
 import { LP_TOKEN_PLATFORM, TOKEN_CLASSES } from "../constants/tokens";
-import {
-  isSushiswapLP,
-  isUniswapv2LP,
-  isUniswapv3LP,
-} from "../hooks/tokenClassification";
+import { isSushiswapLP, isUniswapv2LP } from "../hooks/tokenClassification";
 import {
   fetchAddressInfo,
   fetchLPTokensInfo,
@@ -24,10 +20,10 @@ const classifyTokens = (token) => {
     tokenClass = TOKEN_CLASSES.LP_TOKEN;
     platform = LP_TOKEN_PLATFORM.UNISWAP_V2;
   }
-  if (isUniswapv3LP(token)) {
-    tokenClass = TOKEN_CLASSES.LP_TOKEN;
-    platform = LP_TOKEN_PLATFORM.UNISWAP_V3;
-  }
+  // if (isUniswapv3LP(token)) {
+  //   tokenClass = TOKEN_CLASSES.LP_TOKEN;
+  //   platform = LP_TOKEN_PLATFORM.UNISWAP_V3;
+  // }
   if (isSushiswapLP(token)) {
     tokenClass = TOKEN_CLASSES.LP_TOKEN;
     platform = LP_TOKEN_PLATFORM.SUSHISWAP;
