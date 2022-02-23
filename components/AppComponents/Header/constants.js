@@ -10,8 +10,8 @@ export const HEADER_LINKS = [
     message: "Portfolio",
     to: "/portfolio",
   },
-  {
-    message: "About",
-    to: "/about",
-  },
+  // {
+  //   message: "About",
+  //   to: "/about",
+  // },
 ];

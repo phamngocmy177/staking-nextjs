@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
   maxButton: {
     borderRadius: 25,
     marginLeft: theme.spacing(1),
+    color: theme.colors.text1,
     "& .MuiButton-label": {
       fontSize: 20,
       textDecoration: "underline",
@@ -27,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 16,
     fontWeight: 400,
     marginRight: theme.spacing(1.5),
+    color: theme.colors.text1,
     [theme.breakpoints.down("sm")]: {
       fontSize: 12,
     },

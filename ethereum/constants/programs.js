@@ -14,6 +14,7 @@ export const programs = (chainId) => [
       decimal: 18,
       name: "Uniswap",
       maximumFractionDigits: 4,
+      image: "https://s2.coinmarketcap.com/static/img/coins/64x64/7083.png",
     },
     rewardtAsset: {
       address: STAKING_REWARD_ADDRESS[chainId],
@@ -21,6 +22,7 @@ export const programs = (chainId) => [
       decimal: 18,
       name: "Uniswap",
       maximumFractionDigits: 4,
+      image: "https://s2.coinmarketcap.com/static/img/coins/64x64/7083.png",
     },
   },
 ];

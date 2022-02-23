@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
   },
   outlined: {
     color: theme.palette.primary.main,
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: theme.colors.background1,
     border: `1px solid ${theme.palette.primary.main}`,
     "&:hover": {
       border: `1px solid ${theme.palette.primary.main}`,
@@ -78,6 +78,11 @@ const useStyles = makeStyles((theme) => ({
   },
   gutterBottom: {
     marginBottom: theme.spacing(1),
+  },
+  root: {
+    backgroundColor: theme.colors.background1,
+    borderRadius: 6.5,
+    color: theme.colors.text1,
   },
 }));
 
@@ -117,8 +122,6 @@ const AppButton = ({
   success,
   disabled,
   rounded = true,
-  color = "primary",
-  // color = primaryColor[5],
   variant = "contained",
   fullWidth = true,
   onClick,
@@ -153,8 +156,8 @@ const AppButton = ({
               labelClass ||
                 (large ? classes.buttonLabelLarge : classes.buttonLabel)
             ),
-
             root: classNames(
+              classes.root,
               {
                 [classes.buttonSuccess]: success,
                 [classes.rounded]: rounded,
@@ -171,7 +174,6 @@ const AppButton = ({
           variant={variant}
           disabled={disabled || loading || success}
           onClick={onClick}
-          color={color}
           disableElevation
           {...props}
           aria-busy={loading ? "true" : "false"}

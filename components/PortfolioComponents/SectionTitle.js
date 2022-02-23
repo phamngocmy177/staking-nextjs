@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     },
     fontWeight: "bold",
     textTransform: "uppercase",
-    color: theme.palette.primary.main,
+    color: theme.colors.primary,
   },
   gutterBottom: {
     marginBottom: theme.spacing(1),

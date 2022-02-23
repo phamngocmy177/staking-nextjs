@@ -33,12 +33,12 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 163,
     padding: theme.spacing(1),
 
-    background: "#F5F5F5",
+    background: theme.colors.mainBg,
     justifyContent: "left",
     width: "100%",
   },
   contrastText: {
-    color: theme.palette.primary.contrastText,
+    color: theme.colors.text1,
     fontSize: 18,
     fontWeight: 400,
     [theme.breakpoints.down("sm")]: {
@@ -46,12 +46,15 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   defaultText: {
-    color: "black",
+    color: theme.colors.text1,
     fontSize: 18,
     fontWeight: 500,
     [theme.breakpoints.down("sm")]: {
       fontSize: 15,
     },
+  },
+  walletName: {
+    color: theme.colors.text1,
   },
 }));
 
@@ -123,7 +126,7 @@ const Web3StatusButtonInner = ({ contrastText, withWallet }) => {
                 {shorter(account)}
               </Typography>
               <Hidden smDown>
-                <Typography variant="caption">
+                <Typography variant="caption" className={classes.walletName}>
                   {formatConnectorName(connector)}
                 </Typography>
               </Hidden>
