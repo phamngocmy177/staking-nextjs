@@ -8,12 +8,16 @@ import React from "react";
 import Web3StatusButton from "../../../Web3Components/Web3StatusButton";
 import DrawerMenu from "./DrawerMenu";
 import TransactionsCenter from "../../../Web3Components/TransactionsCenter";
+import { useDarkModeManager } from "state/user/hooks";
+import Brightness4Icon from "@material-ui/icons/Brightness4";
+import Brightness7Icon from "@material-ui/icons/Brightness7";
+import IconButton from "@material-ui/core/IconButton";
 
 const styles = (theme) => ({
   appBar: {
-    backgroundColor: theme.palette.background.paper,
     flexGrow: 1,
     width: "100%",
+    backgroundColor: theme.colors.headerBg,
   },
   toolbar: {
     justifyContent: "flex-end",
@@ -48,28 +52,38 @@ const Header = ({
   userName,
   handleToggleTheme,
   themeType,
-}) => (
-  <AppBar
-    position="sticky"
-    className={classnames(classes.appBar, classes.noShadow)}
-  >
-    <Toolbar className={classes.toolbar} variant="dense">
-      <Box display="flex">
-        <Web3StatusButton />
-        <DrawerMenu
-          photoURL={photoURL}
-          isLoggedIn={isLoggedIn}
-          userName={userName}
-          handleLogout={handleLogout}
-          unseenRecommendationsCount={unseenRecommendationsCount}
-          handleToggleTheme={handleToggleTheme}
-          themeType={themeType}
-        />
-      </Box>
-      <TransactionsCenter />
-    </Toolbar>
-  </AppBar>
-);
+}) => {
+  const [darkMode, toggleSetDarkMode] = useDarkModeManager();
+  return (
+    <AppBar
+      position="sticky"
+      className={classnames(classes.appBar, classes.noShadow)}
+    >
+      <Toolbar className={classes.toolbar} variant="dense">
+        <TransactionsCenter />
+        <IconButton sx={{ ml: 1 }} onClick={toggleSetDarkMode} color="inherit">
+          {darkMode ? (
+            <Brightness7Icon style={{ fill: "white" }} />
+          ) : (
+            <Brightness4Icon style={{ fill: "black" }} />
+          )}
+        </IconButton>
+        <Box display="flex">
+          <Web3StatusButton />
+          <DrawerMenu
+            photoURL={photoURL}
+            isLoggedIn={isLoggedIn}
+            userName={userName}
+            handleLogout={handleLogout}
+            unseenRecommendationsCount={unseenRecommendationsCount}
+            handleToggleTheme={handleToggleTheme}
+            themeType={themeType}
+          />
+        </Box>
+      </Toolbar>
+    </AppBar>
+  );
+};
 
 Header.propTypes = {
   classes: PropTypes.object.isRequired,

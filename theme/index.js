@@ -34,7 +34,7 @@ export function colors(darkMode) {
     white,
     black,
 
-    primary: darkMode ? "#EB2C63" : "#EB2C63",
+    primary: darkMode ? "#EB2C63" : "#F8B3C1",
     // text
     text1: darkMode ? "#FFFFFF" : "#000000",
     text2: darkMode ? "#C3C5CB" : "#565A69",
@@ -50,8 +50,8 @@ export function colors(darkMode) {
     // bg4: darkMode ? "#565A69" : "#888D9B",
     // bg5: darkMode ? "#6C7284" : "#888D9B",
     // bg6: darkMode ? "#1A2028" : "#6C7284",
-    mainBg: darkMode ? "#191B1F" : "#FFF",
-
+    mainBg: darkMode ? "#191B1F" : "#FFF9F0",
+    headerBg: darkMode ? "#191B1F" : "#FFF9F0",
     //specialty colors
     modalBG: darkMode ? "rgba(0,0,0,.425)" : "rgba(0,0,0,0.3)",
     advancedBG: darkMode ? "rgba(0,0,0,0.1)" : "rgba(255,255,255,0.6)",
@@ -126,6 +126,22 @@ export const useTheme = () => {
     // Theme settings
     palette: {
       type: darkMode ? "dark" : "light",
+    },
+    typography: {
+      fontFamily: "Quicksand",
+    },
+    overrides: {
+      MuiCssBaseline: {
+        "@global": {
+          "@font-face": [
+            {
+              fontFamily: "Quicksand",
+              fontStyle: "normal",
+              fontDisplay: "swap",
+            },
+          ],
+        },
+      },
     },
     ...themeObject,
   });
