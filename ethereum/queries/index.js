@@ -54,13 +54,19 @@ export const fetchTokenInfo = async (address) =>
     .get(
       `/getTokenInfo/${address}?apiKey=${process.env.NEXT_PUBLIC_ETHPLORER_KEY}`
     )
-    .then(path["data"]);
+    .then((res) => res?.data);
+
+export const fetchLPTokensInfo = async (lpTokens) => {
+  const token0 = await fetchTokenInfo(lpTokens.token0.id);
+  const token1 = await fetchTokenInfo(lpTokens.token1.id);
+  return { token0, token1 };
+};
 
 export const fetchAddressInfo = async (account) =>
   await ethPlorerClient
     .get(
       `/getAddressInfo/${account}?apiKey=${process.env.NEXT_PUBLIC_ETHPLORER_KEY}`
     )
-    .then(path["data"]);
+    .then((res) => res?.data);
 
 export const tokenExists = pipe(path(["tokens", 0, "name"]), isNil, not);

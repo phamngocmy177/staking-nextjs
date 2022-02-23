@@ -10,6 +10,7 @@ import {
 } from "../hooks/tokenClassification";
 import {
   fetchAddressInfo,
+  fetchLPTokensInfo,
   getSushiswapLPTokenValue,
   getUniswapv2LPTokenValue,
   getUniswapv3LPTokenValue,
@@ -64,10 +65,20 @@ export const useUserLpTokens = (lpTokens) => {
   const lpAddresses = lpTokens;
   const address = lpAddresses;
   const { data } = useSWR(address, fetcher);
+  function fetcherPairTokens(...tokens) {
+    const f = (item) => fetchLPTokensInfo(item);
+    return Promise.all(tokens.map(f));
+  }
+
+  const { data: pairTokens } = useSWR(data, fetcherPairTokens);
 
   return data?.map((item, index) => ({
     ...item,
     ...lpTokens[index],
+    token0:
+      pairTokens && pairTokens[index] ? pairTokens[index].token0 : item.token0,
+    token1:
+      pairTokens && pairTokens[index] ? pairTokens[index].token1 : item.token1,
     price: item.reserveUSD / item.totalSupply,
     value: (item.reserveUSD / item.totalSupply) * lpTokens[index].balance,
     address: item?.id,
