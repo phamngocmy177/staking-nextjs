@@ -1,20 +1,17 @@
 import AppBar from "@material-ui/core/AppBar";
 import Box from "@material-ui/core/Box";
+import IconButton from "@material-ui/core/IconButton";
 import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
-import logo from "assets/images/logo.png";
-import classnames from "classnames";
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
-import { HEADER_LINKS } from "../constants";
-import HeaderLinksSection from "./HeaderLinksSection";
-import TransactionsCenter from "../../../Web3Components/TransactionsCenter";
-import Web3StatusButton from "../../../Web3Components/Web3StatusButton";
-import { useDarkModeManager } from "state/user/hooks";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
-import IconButton from "@material-ui/core/IconButton";
+import classnames from "classnames";
+import React from "react";
+import { useDarkModeManager } from "state/user/hooks";
+import TransactionsCenter from "../../../Web3Components/TransactionsCenter";
+import Web3StatusButton from "../../../Web3Components/Web3StatusButton";
+import { HEADER_LINKS } from "../constants";
+import HeaderLinksSection from "./HeaderLinksSection";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,17 +42,6 @@ const Header = () => {
     >
       <Toolbar classes={{ root: classnames(classes.root, classes.toolbar) }}>
         <Box display="flex" alignItems="center">
-          <Link href={"/"} passHref>
-            <Box style={{ cursor: "pointer" }}>
-              <Image
-                src={logo}
-                alt="logo"
-                height={100}
-                width={"100%"}
-                objectFit="contain"
-              />
-            </Box>
-          </Link>
           <HeaderLinksSection headerLinks={HEADER_LINKS} />
         </Box>
 

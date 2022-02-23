@@ -40,7 +40,6 @@ const AppCurrencyInputField = ({
   submitFieldErrors,
   required,
   balance,
-  depositAssets,
   selectedAsset,
   onChangeDepositAsset,
   ...others
@@ -99,7 +98,6 @@ const AppCurrencyInputField = ({
             <React.Fragment>
               <InputAdornment position="start">
                 <AssetSelectField
-                  depositAssets={depositAssets}
                   selectedAsset={selectedAsset}
                   onChange={onChangeDepositAsset}
                 />

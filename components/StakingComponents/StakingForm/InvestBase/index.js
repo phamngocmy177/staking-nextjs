@@ -34,18 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const renderSubmitMessage = (selectedDepositAsset, apy, endTime) =>
-  `You have requested to deposit ${
-    selectedDepositAsset?.symbol
-  } to the pool, You can now relax and we will do the rest, so you can enjoy the ${parseInt(
-    apy
-  )}% (APY) pool's yield. ${
-    endTime
-      ? `Please remember to claim your funds + rewards right here, once they are returned on the ${new Date(
-          endTime * 1000
-        ).toLocaleDateString("en-GB")}`
-      : ""
-  }`;
+const renderSubmitMessage = () => `You have successfully staked to our program`;
 
 /* eslint-disable react/prefer-stateless-function */
 const InvestBase = ({
@@ -53,7 +42,6 @@ const InvestBase = ({
   minEntrance = 0,
   customValidations = [],
   depositAsset,
-  depositAssets,
   onSubmit,
   address,
   endTime,
@@ -138,7 +126,6 @@ const InvestBase = ({
           ...startFormFields,
           {
             ...constants.ENTER_AMMOUNT,
-            depositAssets,
             selectedAsset: selectedDepositAsset,
             onChangeDepositAsset: (asset) => setSelectedDepositAsset(asset),
             balance: tokenBalance,

@@ -77,7 +77,6 @@ export const AssetSelectField = ({
   ...others
 }) => {
   const classes = useStyles();
-  // const hasMultipleDepositAssets = length(depositAssets) > 1;
   const [dialogOpen, setDialogOpen] = useState(null);
 
   const handleClickListItem = () => {
@@ -124,7 +123,6 @@ export const AssetSelectField = ({
                 ? `${selectedAsset.symbol} `
                 : selectedAsset.symbol}
             </Typography>
-            {/* {hasMultipleDepositAssets && <ArrowDropDownIcon />} */}
           </React.Fragment>
         )}
       </Box>
@@ -139,17 +137,11 @@ export const AssetSelectField = ({
         fixedHeight={false}
       >
         <List>
-          {/* {mapIndexed(
-            (asset, index) => ( */}
           <AssetItem
-            // key={index}
             asset={depositAsset}
             onClick={() => handleMenuItemClick(depositAsset)}
             AssetBalanceComponent={AssetBalanceComponent}
           />
-          {/* ),
-            depositAssets
-          )} */}
         </List>
       </ResponsiveDialog>
     </React.Fragment>
