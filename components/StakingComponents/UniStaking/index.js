@@ -4,9 +4,27 @@ import { useStakingContract } from "../../../ethereum/hooks/useContract";
 import { useTransaction } from "../../../ethereum/hooks/useTransaction";
 import { useActiveWeb3React } from "../../../ethereum/hooks/web3";
 import { toPrice, toWei } from "../../../ethereum/utils/unitsHelper";
+import { makeStyles } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
 
+const useStyles = makeStyles(() => ({
+  container: {
+    border: "0.5px solid grey",
+    borderRadius: 20,
+    padding: 20,
+    height: "100%",
+    textAlign: "center",
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+  },
+}));
 function UniStaking({ program, ...others }) {
   const { account, chainId } = useActiveWeb3React();
+  const classes = useStyles();
+
   const stakingContract = useStakingContract(STAKING_ADDRESS[chainId]);
   const [sendTransaction, transactionState] = useTransaction(stakingContract);
 
@@ -32,13 +50,16 @@ function UniStaking({ program, ...others }) {
   };
 
   return (
-    <InvestBase
-      onSubmit={onSubmit}
-      {...program}
-      {...transactionState}
-      {...others}
-      programTitle={program.title}
-    />
+    <Box className={classes.container}>
+      <Typography className={classes.title}>{program.title}</Typography>
+      <InvestBase
+        onSubmit={onSubmit}
+        {...program}
+        {...transactionState}
+        {...others}
+        programTitle={program.title}
+      />
+    </Box>
   );
 }
 

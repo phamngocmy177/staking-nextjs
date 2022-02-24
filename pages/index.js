@@ -22,14 +22,16 @@ function Staking() {
   return (
     <Layout>
       <Container maxWidth="lg" className={classes.container}>
-        <Grid container justifyContent="center">
-          {activePrograms.map((program) => (
-            <Grid item lg={4} key={program.address}>
+        {activePrograms.map((program) => (
+          <Grid container justifyContent="space-between" key={program.address}>
+            <Grid item lg={4}>
               <UniStaking program={program} />
+            </Grid>
+            <Grid item lg={4}>
               <StakedBalance program={program} />
             </Grid>
-          ))}
-        </Grid>
+          </Grid>
+        ))}
       </Container>
     </Layout>
   );

@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useVersion } from "../../state/application/hooks";
-import { parseByDecimals } from "../utils/unitsHelper";
+import { CryptoAsset } from "../utils/classes";
 import { useStakingContract } from "./useContract";
 import { useActiveWeb3React } from "./web3";
 
@@ -10,7 +10,8 @@ export const useStakedBalance = (contractAddress, token) => {
   const { account, library } = useActiveWeb3React();
   const version = useVersion();
 
-  const [stakedBalance, setStakedBalance] = useState("0");
+  const [userStakedBalance, setUserStakedBalance] = useState("0");
+  const [totalStakedBalance, setTotalStakedBalance] = useState("0");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -18,7 +19,10 @@ export const useStakedBalance = (contractAddress, token) => {
       try {
         setLoading(true);
         const stakedBalance = await contract.stakedBalance(account);
-        setStakedBalance(parseByDecimals(token?.decimals, stakedBalance));
+        const totalBalance = await contract.totalStaked();
+
+        setUserStakedBalance(stakedBalance);
+        setTotalStakedBalance(totalBalance);
         setLoading(false);
       } catch (e) {
         console.log("error useTokenBalance", e);
@@ -30,5 +34,14 @@ export const useStakedBalance = (contractAddress, token) => {
     }
   }, [contract, account, library, version, token?.decimals]);
 
-  return { stakedBalance, loading };
+  const userStakedAsset = useMemo(
+    () => new CryptoAsset(token, userStakedBalance),
+    [token, userStakedBalance]
+  );
+  const totalStakedAsset = useMemo(
+    () => new CryptoAsset(token, totalStakedBalance),
+    [token, totalStakedBalance]
+  );
+
+  return { userStakedAsset, loading, totalStakedAsset };
 };
