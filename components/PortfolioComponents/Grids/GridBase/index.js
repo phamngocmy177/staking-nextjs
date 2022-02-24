@@ -16,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     flexGrow: 1,
     padding: theme.spacing(1),
-    marginBottom: theme.spacing(4),
     borderRadius: theme.spacing(1),
     boxShadow: "20.2749px -8.44789px 59.98px rgba(235, 44, 99, 0.08)",
     border: "0.844789px solid #EFD6DD",
@@ -48,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: theme.spacing(1),
+    marginTop: theme.spacing(4),
   },
   titleButtonWrapper: {
     justifyContent: "flex-end",

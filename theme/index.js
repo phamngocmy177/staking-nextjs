@@ -98,14 +98,14 @@ export const useTheme = () => {
       },
     },
     typography: {
-      fontFamily: "Quicksand",
+      fontFamily: "Montserrat",
     },
     overrides: {
       MuiCssBaseline: {
         "@global": {
           "@font-face": [
             {
-              fontFamily: "Quicksand",
+              fontFamily: "Montserrat",
               fontStyle: "normal",
               fontDisplay: "swap",
             },

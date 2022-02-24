@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.primary,
     marginTop: "10px",
     fontSize: "12px",
-    whiteSpace: "break-spaces",
+    // whiteSpace: "break-spaces",
   },
   circleWrapper: {
     color: theme.palette.text.primary,

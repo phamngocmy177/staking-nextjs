@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
+    color: theme.colors.text1,
   },
   balanceRow: {
     display: "flex",
@@ -36,14 +37,12 @@ const useStyles = makeStyles((theme) => ({
   balanceLabel: {
     fontSize: 16,
     fontWeight: 500,
+    color: theme.colors.text1,
   },
   balanceValue: {
     fontSize: 20,
     fontWeight: "bolder",
-  },
-  selectTypography: {
-    margin: theme.spacing(2, 0),
-    fontSize: 16,
+    color: theme.colors.text1,
   },
 }));
 

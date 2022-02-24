@@ -1,5 +1,4 @@
 import AppWrapper from "components/AppComponents/AppWrapper";
-import Footer from "components/AppComponents/Footer";
 import Header from "components/AppComponents/Header";
 import MainWrapper from "components/AppComponents/MainWrapper";
 import { useRouter } from "next/router";
@@ -14,7 +13,6 @@ export default function Layout({ children }) {
       <MainWrapper enableBackground={router.pathname === "/"}>
         {children}
       </MainWrapper>
-      <Footer />
     </AppWrapper>
   );
 }
