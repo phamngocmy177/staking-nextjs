@@ -1,18 +1,19 @@
+import { BigNumber } from "@ethersproject/bignumber";
+import Box from "@material-ui/core/Box";
+import Divider from "@material-ui/core/Divider";
+import Slider from "@material-ui/core/Slider";
+import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import React, { useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { STAKING_ADDRESS } from "../../../ethereum/constants/address";
-import { useStakedBalance } from "../../../ethereum/hooks/useStakedBalance";
-import { useActiveWeb3React } from "../../../ethereum/hooks/web3";
-import AppButton from "../../AppComponents/AppButton";
-import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
 import { useStakingContract } from "../../../ethereum/hooks/useContract";
+import { useStakedBalance } from "../../../ethereum/hooks/useStakedBalance";
 import { useTransaction } from "../../../ethereum/hooks/useTransaction";
-import { toPrice, toWei } from "../../../ethereum/utils/unitsHelper";
-import Slider from "@material-ui/core/Slider";
-import { BigNumber } from "@ethersproject/bignumber";
+import { useActiveWeb3React } from "../../../ethereum/hooks/web3";
 import { parseByDecimals } from "../../../ethereum/utils/unitsHelper";
+import AppButton from "../../AppComponents/AppButton";
+import DialogTransactionWrapper from "../StakingForm/InvestBase/DialogTransactionWrapper";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -63,6 +64,7 @@ function StakedBalance({ program }) {
   const { account, chainId } = useActiveWeb3React();
 
   const [percentWithdraw, setPercentWithdraw] = useState(0);
+  const [openTransactionModal, setOpenTransactionModal] = useState(false);
 
   const { userStakedAsset, loading, totalStakedAsset } = useStakedBalance(
     STAKING_ADDRESS[chainId],
@@ -77,8 +79,11 @@ function StakedBalance({ program }) {
     setPercentWithdraw(newValue);
     setAmountWithdraw(userStakedAsset.rawAmount.mul(newValue).div(100));
   };
-
+  const onCloseTransactionModal = () => {
+    setOpenTransactionModal(false);
+  };
   const onWithdraw = async () => {
+    setOpenTransactionModal(true);
     const txParams = [amountWithdraw];
 
     const payableAmount = 0;
@@ -88,9 +93,10 @@ function StakedBalance({ program }) {
       txParams,
       payableAmount,
       account,
-      `Withdraw ${toPrice(amountWithdraw, program.depositAsset?.symbol)} from ${
-        program.title
-      }`
+      `Withdraw 
+        ${parseByDecimals(program.depositAsset.decimals, amountWithdraw)}
+         ${program.depositAsset?.symbol}
+       from ${program.title}`
     );
   };
 
@@ -115,7 +121,7 @@ function StakedBalance({ program }) {
           symbol={program.depositAsset.symbol}
         />
       </Box>
-      <hr />
+      <Divider />
       <Box className={classes.balanceRow}>
         <Typography className={classes.balanceLabel}>Select Amount</Typography>
         <Typography className={classes.balanceValue}>
@@ -129,12 +135,14 @@ function StakedBalance({ program }) {
         onChange={handleWithdrawPercentChange}
       />
       <AppButton
-        disabled={
-          userStakedAsset?.rawAmount?.isZero &&
-          userStakedAsset?.rawAmount?.isZero()
-        }
+        disabled={amountWithdraw?.isZero()}
         onClick={onWithdraw}
         label={"Withdraw"}
+      />
+      <DialogTransactionWrapper
+        transactionProps={transactionState}
+        open={openTransactionModal}
+        handleClose={onCloseTransactionModal}
       />
     </Box>
   );
