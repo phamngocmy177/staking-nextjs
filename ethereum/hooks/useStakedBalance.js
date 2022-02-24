@@ -3,6 +3,7 @@ import { useVersion } from "../../state/application/hooks";
 import { CryptoAsset } from "../utils/classes";
 import { useStakingContract } from "./useContract";
 import { useActiveWeb3React } from "./web3";
+import { BigNumber } from "@ethersproject/bignumber";
 
 export const useStakedBalance = (contractAddress, token) => {
   const contract = useStakingContract(contractAddress);
@@ -10,8 +11,10 @@ export const useStakedBalance = (contractAddress, token) => {
   const { account, library } = useActiveWeb3React();
   const version = useVersion();
 
-  const [userStakedBalance, setUserStakedBalance] = useState("0");
-  const [totalStakedBalance, setTotalStakedBalance] = useState("0");
+  const [userStakedBalance, setUserStakedBalance] = useState(BigNumber.from(0));
+  const [totalStakedBalance, setTotalStakedBalance] = useState(
+    BigNumber.from(0)
+  );
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -21,8 +24,8 @@ export const useStakedBalance = (contractAddress, token) => {
         const stakedBalance = await contract.stakedBalance(account);
         const totalBalance = await contract.totalStaked();
 
-        setUserStakedBalance(stakedBalance);
-        setTotalStakedBalance(totalBalance);
+        setUserStakedBalance(BigNumber.from(stakedBalance));
+        setTotalStakedBalance(BigNumber.from(totalBalance));
         setLoading(false);
       } catch (e) {
         console.log("error useTokenBalance", e);

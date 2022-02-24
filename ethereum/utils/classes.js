@@ -70,4 +70,14 @@ export class CryptoAsset {
       "invalid add operation - trying to add 2 different type of assets"
     );
   }
+
+  mul(amountToMul) {
+    if (amountToMul) {
+      const newAmount = this.rawAmount.mul(amountToMul);
+      return new CryptoAsset(this.asset, newAmount);
+    }
+    throw Error(
+      "invalid add operation - trying to add 2 different type of assets"
+    );
+  }
 }
