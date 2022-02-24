@@ -93,6 +93,9 @@ export const useTheme = () => {
     // Theme settings
     palette: {
       type: darkMode ? "dark" : "light",
+      primary: {
+        main: "#F8B3C1",
+      },
     },
     typography: {
       fontFamily: "Quicksand",

@@ -118,7 +118,7 @@ AppForm.defaultProps = {
 AppForm.propTypes = {
   formFields: PropTypes.array,
   submitButtonText: PropTypes.string,
-  children: PropTypes.element,
+  // children: PropTypes.element,
   loading: PropTypes.bool,
   success: PropTypes.bool,
   successText: PropTypes.string,

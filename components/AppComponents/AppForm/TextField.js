@@ -66,7 +66,7 @@ const AppTextField = ({
           ) : undefined,
           endAdornment:
             (error || isSubmitError) && error && touched ? (
-              <InputAdornment>
+              <InputAdornment position="end">
                 <Error color="error" />
               </InputAdornment>
             ) : undefined,

@@ -34,8 +34,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const renderSubmitMessage = () => `You have successfully staked to our program`;
-
 /* eslint-disable react/prefer-stateless-function */
 const InvestBase = ({
   initialValues,
@@ -44,8 +42,6 @@ const InvestBase = ({
   depositAsset,
   onSubmit,
   address,
-  endTime,
-  apy,
   FormTitleComponent,
   startFormFields = [],
   endFormFields = [],
@@ -112,11 +108,6 @@ const InvestBase = ({
         {...others}
         open={openTransactionModal}
         handleClose={handleCloseTransactionModal}
-        successDescription={renderSubmitMessage(
-          selectedDepositAsset,
-          apy,
-          endTime
-        )}
       />
       {FormTitleComponent ? FormTitleComponent : undefined}
       {AboveEnterAmountComponent ? AboveEnterAmountComponent : undefined}

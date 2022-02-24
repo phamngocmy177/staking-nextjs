@@ -59,18 +59,17 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0.75, 0.5),
   },
   outlined: {
-    color: theme.palette.primary.main,
     backgroundColor: theme.colors.background1,
-    border: `1px solid ${theme.palette.primary.main}`,
+    border: `1px solid ${theme.colors.background1}`,
     "&:hover": {
-      border: `1px solid ${theme.palette.primary.main}`,
-      backgroundColor: theme.palette.primary.dark,
+      border: `1px solid ${theme.colors.background1}`,
+      backgroundColor: theme.colors.background1,
       color: theme.palette.primary.contrastText,
     },
     "&:focus": {
-      border: `1px solid ${theme.palette.primary.main}`,
+      border: `1px solid ${theme.colors.background1}`,
       backgroundColor: "transparent",
-      color: theme.palette.primary.main,
+      color: theme.colors.background1,
     },
   },
   text: {

@@ -9,6 +9,7 @@ import { useStore } from "react-redux";
 import { PersistGate } from "redux-persist/lib/integration/react";
 import wrapper from "state";
 import { useTheme } from "../theme";
+import "react-loading-skeleton/dist/skeleton.css";
 // const PageChange = dynamic(
 //   () => import("components/DashboardComponents/PageChange/PageChange.js"),
 //   {

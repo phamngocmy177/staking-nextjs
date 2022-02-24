@@ -134,14 +134,14 @@ export default function TransactionsCenter() {
               <ClickAwayListener onClickAway={handleCloseNotification}>
                 <MenuList role="menu">
                   {length(confirmed) + length(pending) ? (
-                    <React.Fragment>
+                    <Box>
                       {mapIndexed(createTransactionItem(classes, chainId))(
                         pending
                       )}
                       {mapIndexed(createTransactionItem(classes, chainId))(
                         confirmed
                       )}
-                    </React.Fragment>
+                    </Box>
                   ) : (
                     <MenuItem disabled>
                       <Box width={300} padding={3}>
