@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   // error: { color: theme.palette.dangerColor[0] },
   // success: { color: theme.palette.successColor[0] },
   title: {
-    color: "#4C4C66",
+    color: theme.colors.text1,
     fontSize: 14,
     fontWeight: "bold",
     opacity: 0.8,
@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: "break-word",
   },
   summary: {
-    color: "#6F6C99",
+    color: theme.colors.text1,
     fontSize: 12,
     fontWeight: 400,
     marginBottom: theme.spacing(1.2),
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "left",
   },
   timeago: {
-    color: "#6F6C99",
+    color: theme.colors.text1,
     fontSize: 11,
     fontWeight: 400,
   },
