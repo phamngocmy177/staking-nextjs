@@ -43,16 +43,7 @@ const styles = (theme) => ({
   logo: {},
 });
 
-const Header = ({
-  classes,
-  handleLogout,
-  unseenRecommendationsCount,
-  photoURL,
-  isLoggedIn,
-  userName,
-  handleToggleTheme,
-  themeType,
-}) => {
+const Header = ({ classes }) => {
   const [darkMode, toggleSetDarkMode] = useDarkModeManager();
   return (
     <AppBar
@@ -61,24 +52,21 @@ const Header = ({
     >
       <Toolbar className={classes.toolbar} variant="dense">
         <TransactionsCenter />
-        <IconButton sx={{ ml: 1 }} onClick={toggleSetDarkMode} color="inherit">
-          {darkMode ? (
-            <Brightness7Icon style={{ fill: "white" }} />
-          ) : (
-            <Brightness4Icon style={{ fill: "black" }} />
-          )}
-        </IconButton>
+
         <Box display="flex">
           <Web3StatusButton />
-          <DrawerMenu
-            photoURL={photoURL}
-            isLoggedIn={isLoggedIn}
-            userName={userName}
-            handleLogout={handleLogout}
-            unseenRecommendationsCount={unseenRecommendationsCount}
-            handleToggleTheme={handleToggleTheme}
-            themeType={themeType}
-          />
+          <IconButton
+            sx={{ ml: 1 }}
+            onClick={toggleSetDarkMode}
+            color="inherit"
+          >
+            {darkMode ? (
+              <Brightness7Icon style={{ fill: "white" }} />
+            ) : (
+              <Brightness4Icon style={{ fill: "black" }} />
+            )}
+          </IconButton>
+          <DrawerMenu />
         </Box>
       </Toolbar>
     </AppBar>

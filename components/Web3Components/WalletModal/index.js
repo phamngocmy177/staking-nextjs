@@ -106,7 +106,7 @@ export default function WalletModal() {
       const option = SUPPORTED_WALLETS[key];
       // check for mobile options
       if (isMobile) {
-        if (!window.web3 && !window.ethereum && option.mobile) {
+        if (option.mobile) {
           return (
             <Option
               onClick={(e) => {
