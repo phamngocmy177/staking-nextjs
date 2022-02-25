@@ -12,9 +12,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "block",
     padding: theme.spacing(4, 0, 0, 0),
-    [theme.breakpoints.down("sm")]: {
-      padding: theme.spacing(4, 2, 0, 2),
-    },
   },
   background: {
     [theme.breakpoints.up("md")]: {

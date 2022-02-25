@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   title: {
-    color: "#4C4C66",
+    color: theme.colors.text1,
     fontSize: 12,
     fontWeight: 700,
     textTransform: "uppercase",

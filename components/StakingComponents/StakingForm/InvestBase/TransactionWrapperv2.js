@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+    height: "100%",
     // padding: theme.spacing(0, 3),
   },
   titleTypography: {
@@ -47,7 +48,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-/* eslint-disable react/prefer-stateless-function */
 const TransactionWrapper = ({
   attempting,
   error,
