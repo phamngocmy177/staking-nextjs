@@ -16,6 +16,7 @@ import {
   ExplorerDataType,
 } from "../../../../ethereum/utils/getEthplorerLink";
 import AppButton from "../../../AppComponents/AppButton";
+import CloudDone from "@material-ui/icons/CloudDone";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -45,6 +46,9 @@ const useStyles = makeStyles((theme) => ({
   },
   successDescription: {
     fontSize: 18,
+  },
+  txStatusIcon: {
+    fill: theme.colors.primary,
   },
 }));
 
@@ -96,7 +100,10 @@ const TransactionWrapper = ({
     return (
       <Box className={classes.container}>
         {/* <Danger> */}
-        <ErrorOutlineIcon className={classes.icon} />
+        <ErrorOutlineIcon
+          className={classes.icon}
+          style={{ fill: "#F8B3C1" }}
+        />
         {/* </Danger> */}
         <Typography
           className={classes.titleTypography}
@@ -126,6 +133,7 @@ const TransactionWrapper = ({
         {/* <CloudUploadOutlinedIcon className={classes.icon} /> */}
         {/* <img src={TransactionSubmittedImage} className={classes.icon} alt="" /> */}
         {/* </Info> */}
+        <CloudDone className={classes.icon} style={{ fill: "#9DD9CF" }} />
         <Typography
           className={classes.titleTypography}
           tabIndex="0"
