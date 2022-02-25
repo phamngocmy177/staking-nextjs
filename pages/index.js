@@ -10,6 +10,9 @@ import { useActiveWeb3React } from "../ethereum/hooks/web3";
 const useStyles = makeStyles((theme) => ({
   container: {
     padding: theme.spacing(4, 0, 0, 0),
+    [theme.breakpoints.down("sm")]: {
+      padding: theme.spacing(4, 2, 0, 2),
+    },
   },
 }));
 
@@ -24,10 +27,10 @@ function Staking() {
       <Container maxWidth="lg" className={classes.container}>
         {activePrograms.map((program) => (
           <Grid container justifyContent="space-between" key={program.address}>
-            <Grid item lg={4}>
+            <Grid item lg={4} sm={12} xs={12}>
               <UniStaking program={program} />
             </Grid>
-            <Grid item lg={4}>
+            <Grid item lg={4} sm={12} xs={12}>
               <StakedBalance program={program} />
             </Grid>
           </Grid>

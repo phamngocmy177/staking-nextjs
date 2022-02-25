@@ -8,7 +8,10 @@ import React, { useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { STAKING_ADDRESS } from "../../../ethereum/constants/address";
 import { useStakingContract } from "../../../ethereum/hooks/useContract";
-import { useStakedBalance } from "../../../ethereum/hooks/useStakedBalance";
+import {
+  useUserStakedBalance,
+  useTotalStakedBalance,
+} from "../../../ethereum/hooks/useStakedBalance";
 import { useTransaction } from "../../../ethereum/hooks/useTransaction";
 import { useActiveWeb3React } from "../../../ethereum/hooks/web3";
 import { parseByDecimals } from "../../../ethereum/utils/unitsHelper";
@@ -65,7 +68,11 @@ function StakedBalance({ program }) {
   const [percentWithdraw, setPercentWithdraw] = useState(0);
   const [openTransactionModal, setOpenTransactionModal] = useState(false);
 
-  const { userStakedAsset, loading, totalStakedAsset } = useStakedBalance(
+  const { userStakedAsset, userLoading } = useUserStakedBalance(
+    STAKING_ADDRESS[chainId],
+    program.depositAsset
+  );
+  const { totalLoading, totalStakedAsset } = useTotalStakedBalance(
     STAKING_ADDRESS[chainId],
     program.depositAsset
   );
@@ -105,7 +112,7 @@ function StakedBalance({ program }) {
       <Box className={classes.balanceRow}>
         <Typography className={classes.balanceLabel}>TVL:</Typography>
         <BalanceTypography
-          loading={loading}
+          loading={userLoading}
           balance={totalStakedAsset}
           symbol={program.depositAsset.symbol}
         />
@@ -115,7 +122,7 @@ function StakedBalance({ program }) {
           Staked Balance:
         </Typography>
         <BalanceTypography
-          loading={loading}
+          loading={totalLoading}
           balance={userStakedAsset}
           symbol={program.depositAsset.symbol}
         />

@@ -5,46 +5,77 @@ import { useStakingContract } from "./useContract";
 import { useActiveWeb3React } from "./web3";
 import { BigNumber } from "@ethersproject/bignumber";
 
-export const useStakedBalance = (contractAddress, token) => {
+export const useUserStakedBalance = (contractAddress, token) => {
   const contract = useStakingContract(contractAddress);
+  const { account } = useActiveWeb3React();
 
-  const { account, library } = useActiveWeb3React();
+  const { loading, stakedAsset: userStakedAsset } = useStakedBalance({
+    contract,
+    token,
+    functionName: "stakedBalance",
+    functionParams: account,
+    fetchCondition: !!account,
+  });
+
+  return { userStakedAsset, loading };
+};
+
+export const useTotalStakedBalance = (contractAddress, token) => {
+  const contract = useStakingContract(contractAddress);
+  const { loading, stakedAsset: totalStakedAsset } = useStakedBalance({
+    contract,
+    token,
+    functionName: "totalStaked",
+  });
+
+  return { loading, totalStakedAsset };
+};
+
+const useStakedBalance = ({
+  contract,
+  token,
+  functionName,
+  fetchCondition = true,
+  functionParams,
+}) => {
+  const { library } = useActiveWeb3React();
   const version = useVersion();
 
-  const [userStakedBalance, setUserStakedBalance] = useState(BigNumber.from(0));
-  const [totalStakedBalance, setTotalStakedBalance] = useState(
-    BigNumber.from(0)
-  );
+  const [stakedBalance, setStakedBalance] = useState(BigNumber.from(0));
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const stakedBalance = await contract.stakedBalance(account);
-        const totalBalance = await contract.totalStaked();
+        const balance = await contract[functionName](
+          functionParams?.length ? functionParams : null
+        );
 
-        setUserStakedBalance(BigNumber.from(stakedBalance));
-        setTotalStakedBalance(BigNumber.from(totalBalance));
+        setStakedBalance(BigNumber.from(balance));
         setLoading(false);
       } catch (e) {
-        console.log("error useTokenBalance", e);
+        console.log("error useStakedBalance", e);
         setLoading(false);
       }
     };
-    if (contract && account) {
+    if (contract && fetchCondition) {
       fetchData();
     }
-  }, [contract, account, library, version, token?.decimals]);
+  }, [
+    contract,
+    library,
+    version,
+    token.decimals,
+    fetchCondition,
+    functionName,
+    functionParams,
+  ]);
 
-  const userStakedAsset = useMemo(
-    () => new CryptoAsset(token, userStakedBalance),
-    [token, userStakedBalance]
-  );
-  const totalStakedAsset = useMemo(
-    () => new CryptoAsset(token, totalStakedBalance),
-    [token, totalStakedBalance]
+  const stakedAsset = useMemo(
+    () => new CryptoAsset(token, stakedBalance),
+    [token, stakedBalance]
   );
 
-  return { userStakedAsset, loading, totalStakedAsset };
+  return { loading, stakedAsset };
 };
