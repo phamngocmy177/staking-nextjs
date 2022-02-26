@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function TokenField({ value }) {
+const TokenField = ({ value }) => {
   const classes = useStyles();
 
   return (
@@ -25,6 +25,6 @@ function TokenField({ value }) {
       {value.symbol}
     </Box>
   );
-}
+};
 
 export default TokenField;

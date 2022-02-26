@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 /* eslint-disable react/prefer-stateless-function */
-const InvestBase = ({
+function InvestBase({
   initialValues,
   minEntrance = 0,
   customValidations = [],
@@ -51,7 +51,7 @@ const InvestBase = ({
   disableApprovalFlow,
   disableSubmit,
   ...others
-}) => {
+}) {
   const classes = useStyles();
   const [approvalSubmitted, setApprovalSubmitted] = useState(false);
   const [openTransactionModal, setOpenTransactionModal] = useState(false);
@@ -154,5 +154,5 @@ const InvestBase = ({
       </AppForm>
     </React.Fragment>
   );
-};
+}
 export default InvestBase;

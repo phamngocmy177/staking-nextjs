@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function LPTokensField({ value }) {
+const LPTokensField = ({ value }) => {
   const classes = useStyles();
 
   return (
@@ -26,6 +26,6 @@ function LPTokensField({ value }) {
       {`${value.pool} ${value.token0.symbol} / ${value.token1.symbol}`}
     </Box>
   );
-}
+};
 
 export default LPTokensField;

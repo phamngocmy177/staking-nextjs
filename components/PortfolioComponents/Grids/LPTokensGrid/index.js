@@ -50,7 +50,7 @@ const columnsMobile = [
   },
 ];
 
-function LPTokensGrid({ rows = [], isMobile, ...others }) {
+const LPTokensGrid = ({ rows = [], isMobile, ...others }) => {
   const parsedRows = map((row) => ({
     ...row,
     tokensData: {
@@ -70,6 +70,6 @@ function LPTokensGrid({ rows = [], isMobile, ...others }) {
       />
     </React.Fragment>
   );
-}
+};
 
 export default LPTokensGrid;

@@ -50,7 +50,7 @@ const columnsMobile = [
   },
 ];
 
-function RegularTokensGrid({ rows = [], isMobile, ...others }) {
+const RegularTokensGrid = ({ rows = [], isMobile, ...others }) => {
   const parsedRows = map((row) => ({
     ...row,
     tokenData: {
@@ -76,6 +76,6 @@ function RegularTokensGrid({ rows = [], isMobile, ...others }) {
       />
     </React.Fragment>
   );
-}
+};
 
 export default RegularTokensGrid;

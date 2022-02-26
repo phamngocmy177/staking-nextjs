@@ -5,21 +5,19 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 import { SnackbarProvider } from "notistack";
 import React from "react";
+import "react-loading-skeleton/dist/skeleton.css";
 import { useStore } from "react-redux";
 import { PersistGate } from "redux-persist/lib/integration/react";
 import wrapper from "state";
 import { useTheme } from "../theme";
-import ReactDOM from "react-dom";
-import Router from "next/router";
+import "./app.scss";
 
-import "react-loading-skeleton/dist/skeleton.css";
 const PageChange = dynamic(
   () => import("components/AppComponents/PageChange"),
   {
     ssr: false,
   }
 );
-import "./app.scss";
 
 const Web3ReactManager = dynamic(
   () => import("components/Web3Components/Web3ReactManager"),
@@ -44,15 +42,6 @@ const Web3ProviderNetwork = dynamic(
   { ssr: false }
 );
 
-Router.events.on("routeChangeComplete", () => {
-  ReactDOM.unmountComponentAtNode(document.getElementById("page-transition"));
-  document.body.classList.remove("body-page-transition");
-});
-Router.events.on("routeChangeError", () => {
-  ReactDOM.unmountComponentAtNode(document.getElementById("page-transition"));
-  document.body.classList.remove("body-page-transition");
-});
-
 function Updaters() {
   return (
     <>
@@ -64,7 +53,7 @@ function Updaters() {
   );
 }
 
-const MyApp = ({ Component, pageProps }) => {
+function MyApp({ Component, pageProps }) {
   const store = useStore((state) => state);
   const Layout = Component.layout || (({ children }) => <>{children}</>);
 
@@ -102,7 +91,7 @@ const MyApp = ({ Component, pageProps }) => {
       </PersistGate>
     </React.Fragment>
   );
-};
+}
 
 MyApp.getInitialProps = async ({ Component, ctx }) => {
   let pageProps = {};

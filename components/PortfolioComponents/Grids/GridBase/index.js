@@ -72,7 +72,7 @@ const NoRowsComponent = () => {
   return <Box className={classes.connectWalletButton}>No Assets</Box>;
 };
 
-function GridBase({
+const GridBase = ({
   rows = [],
   columns,
   isRapidUnwindingOn,
@@ -80,7 +80,7 @@ function GridBase({
   loading,
   TitleButtonComponent,
   ...others
-}) {
+}) => {
   const classes = useStyles();
   const total = sumListValues(rows);
   return (
@@ -134,6 +134,6 @@ function GridBase({
       </Paper>
     </React.Fragment>
   );
-}
+};
 
 export default GridBase;
