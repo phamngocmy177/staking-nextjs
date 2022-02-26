@@ -11,7 +11,7 @@ import classnames from "classnames";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "block",
-    padding: theme.spacing(4, 0, 0, 0),
+    padding: theme.spacing(4, 0, 4, 0),
   },
   background: {
     [theme.breakpoints.up("md")]: {
