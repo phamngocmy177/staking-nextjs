@@ -1,19 +1,17 @@
 import AppBar from "@material-ui/core/AppBar";
 import Box from "@material-ui/core/Box";
-import { withStyles } from "@material-ui/core/styles";
+import IconButton from "@material-ui/core/IconButton";
+import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
-import classnames from "classnames";
-import PropTypes from "prop-types";
-import React from "react";
-import Web3StatusButton from "../../../Web3Components/Web3StatusButton";
-import DrawerMenu from "./DrawerMenu";
-import TransactionsCenter from "../../../Web3Components/TransactionsCenter";
-import { useDarkModeManager } from "state/user/hooks";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
-import IconButton from "@material-ui/core/IconButton";
-
-const styles = (theme) => ({
+import classnames from "classnames";
+import React from "react";
+import { useDarkModeManager } from "state/user/hooks";
+import TransactionsCenter from "../../../Web3Components/TransactionsCenter";
+import Web3StatusButton from "../../../Web3Components/Web3StatusButton";
+import DrawerMenu from "./DrawerMenu";
+const useStyles = makeStyles((theme) => ({
   appBar: {
     flexGrow: 1,
     width: "100%",
@@ -41,10 +39,12 @@ const styles = (theme) => ({
     transform: "translate(50%, -50%)",
   },
   logo: {},
-});
+}));
 
-const Header = ({ classes }) => {
+const MobileHeader = () => {
   const [darkMode, toggleSetDarkMode] = useDarkModeManager();
+  const classes = useStyles();
+
   return (
     <AppBar
       position="sticky"
@@ -73,8 +73,4 @@ const Header = ({ classes }) => {
   );
 };
 
-Header.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(Header);
+export default MobileHeader;

@@ -1,6 +1,6 @@
 import React from "react";
 import ResponsiveDialog from "../../../AppComponents/ResponsiveDialog";
-import TransactionWrapper from "./TransactionWrapperv2";
+import TransactionWrapper from "./TransactionWrapper";
 
 const DialogTransactionWrapper = ({
   open,

@@ -129,10 +129,6 @@ const TransactionWrapper = ({
   if (success) {
     return (
       <Box className={classes.container}>
-        {/* <Info> */}
-        {/* <CloudUploadOutlinedIcon className={classes.icon} /> */}
-        {/* <img src={TransactionSubmittedImage} className={classes.icon} alt="" /> */}
-        {/* </Info> */}
         <CloudDone className={classes.icon} style={{ fill: "#9DD9CF" }} />
         <Typography
           className={classes.titleTypography}

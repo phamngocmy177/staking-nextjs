@@ -9,13 +9,16 @@ import { useStore } from "react-redux";
 import { PersistGate } from "redux-persist/lib/integration/react";
 import wrapper from "state";
 import { useTheme } from "../theme";
+import ReactDOM from "react-dom";
+import Router from "next/router";
+
 import "react-loading-skeleton/dist/skeleton.css";
-// const PageChange = dynamic(
-//   () => import("components/DashboardComponents/PageChange/PageChange.js"),
-//   {
-//     ssr: false,
-//   }
-// );
+const PageChange = dynamic(
+  () => import("components/AppComponents/PageChange"),
+  {
+    ssr: false,
+  }
+);
 import "./app.scss";
 
 const Web3ReactManager = dynamic(
@@ -41,23 +44,14 @@ const Web3ProviderNetwork = dynamic(
   { ssr: false }
 );
 
-const PageChange = () => <div></div>;
-
-// Router.events.on("routeChangeStart", (url) => {
-//   document.body.classList.add("body-page-transition");
-//   ReactDOM.render(
-//     <PageChange path={url} />,
-//     document.getElementById("page-transition")
-//   );
-// });
-// Router.events.on("routeChangeComplete", () => {
-//   ReactDOM.unmountComponentAtNode(document.getElementById("page-transition"));
-//   document.body.classList.remove("body-page-transition");
-// });
-// Router.events.on("routeChangeError", () => {
-//   ReactDOM.unmountComponentAtNode(document.getElementById("page-transition"));
-//   document.body.classList.remove("body-page-transition");
-// });
+Router.events.on("routeChangeComplete", () => {
+  ReactDOM.unmountComponentAtNode(document.getElementById("page-transition"));
+  document.body.classList.remove("body-page-transition");
+});
+Router.events.on("routeChangeError", () => {
+  ReactDOM.unmountComponentAtNode(document.getElementById("page-transition"));
+  document.body.classList.remove("body-page-transition");
+});
 
 function Updaters() {
   return (
