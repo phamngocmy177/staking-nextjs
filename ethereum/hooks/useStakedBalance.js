@@ -31,6 +31,21 @@ export const useTotalStakedBalance = (contractAddress, token) => {
   return { loading, totalStakedAsset };
 };
 
+export const useEarnedBalance = (contractAddress, token) => {
+  const contract = useStakingContract(contractAddress);
+  const { account } = useActiveWeb3React();
+
+  const { loading, stakedAsset: earnedAsset } = useStakedBalance({
+    contract,
+    token,
+    functionName: "earned",
+    functionParams: account,
+    fetchCondition: !!account,
+  });
+  console.log("earnedAsset", earnedAsset);
+  return { loading, earnedAsset };
+};
+
 const useStakedBalance = ({
   contract,
   token,

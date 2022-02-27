@@ -11,6 +11,7 @@ import { useStakingContract } from "../../../ethereum/hooks/useContract";
 import {
   useUserStakedBalance,
   useTotalStakedBalance,
+  useEarnedBalance,
 } from "../../../ethereum/hooks/useStakedBalance";
 import { useTransaction } from "../../../ethereum/hooks/useTransaction";
 import { useActiveWeb3React } from "../../../ethereum/hooks/web3";
@@ -68,11 +69,15 @@ function StakedBalance({ program }) {
   const [percentWithdraw, setPercentWithdraw] = useState(0);
   const [openTransactionModal, setOpenTransactionModal] = useState(false);
 
-  const { userStakedAsset, userLoading } = useUserStakedBalance(
+  const { userStakedAsset, loading: userLoading } = useUserStakedBalance(
     STAKING_ADDRESS[chainId],
     program.depositAsset
   );
-  const { totalLoading, totalStakedAsset } = useTotalStakedBalance(
+  const { loading: totalLoading, totalStakedAsset } = useTotalStakedBalance(
+    STAKING_ADDRESS[chainId],
+    program.depositAsset
+  );
+  const { loading: earnedLoading, earnedAsset } = useEarnedBalance(
     STAKING_ADDRESS[chainId],
     program.depositAsset
   );
@@ -124,6 +129,14 @@ function StakedBalance({ program }) {
         <BalanceTypography
           loading={totalLoading}
           balance={userStakedAsset}
+          symbol={program.depositAsset.symbol}
+        />
+      </Box>
+      <Box className={classes.balanceRow}>
+        <Typography className={classes.balanceLabel}>Earned:</Typography>
+        <BalanceTypography
+          loading={earnedLoading}
+          balance={earnedAsset}
           symbol={program.depositAsset.symbol}
         />
       </Box>
