@@ -42,7 +42,6 @@ export const useEarnedBalance = (contractAddress, token) => {
     functionParams: account,
     fetchCondition: !!account,
   });
-  console.log("earnedAsset", earnedAsset);
   return { loading, earnedAsset };
 };
 
