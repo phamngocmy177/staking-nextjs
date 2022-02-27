@@ -7,9 +7,13 @@ import React from "react";
 import { SUPPORTED_WALLETS } from "../../../ethereum/constants/wallet";
 import { useActiveWeb3React } from "../../../ethereum/hooks/web3";
 import { shorter } from "../../../ethereum/utils";
-import { injected, walletconnect } from "../../../ethereum/connectors";
+import {
+  injected,
+  walletconnect,
+  walletlink,
+} from "../../../ethereum/connectors";
 import AppButton from "../../AppComponents/AppButton";
-
+import Image from "next/image";
 import {
   ExplorerDataType,
   getExplorerLink,
@@ -131,10 +135,22 @@ export default function AccountDetails({ ENSName, openOptions }) {
     } else if (connector === walletconnect) {
       return (
         <Box className={classes.iconWrapper}>
-          <img
+          <Image
             src={SUPPORTED_WALLETS.WALLET_CONNECT.iconURL}
-            alt={"WalletConnect logo"}
-            className={classes.icon}
+            alt={"Icon"}
+            height={16}
+            width={16}
+          />
+        </Box>
+      );
+    } else if (connector === walletlink) {
+      return (
+        <Box className={classes.iconWrapper}>
+          <Image
+            src={SUPPORTED_WALLETS.WALLET_LINK.iconURL}
+            alt={"Icon"}
+            height={16}
+            width={16}
           />
         </Box>
       );

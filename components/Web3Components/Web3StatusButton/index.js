@@ -9,7 +9,7 @@ import Jazzicon from "@metamask/jazzicon";
 import { UnsupportedChainIdError, useWeb3React } from "@web3-react/core";
 import WalletConnectIcon from "assets/images/icons/walletConnectIcon.svg";
 import Button from "@material-ui/core/Button";
-import { injected, walletconnect } from "ethereum/connectors";
+import { injected, walletconnect, walletlink } from "ethereum/connectors";
 import { useActiveWeb3React } from "ethereum/hooks/web3";
 import React, { useEffect, useRef } from "react";
 import { useWalletModalToggle } from "state/application/hooks";
@@ -20,6 +20,7 @@ import WalletModal from "../WalletModal";
 import { formatConnectorName } from "../WalletModal/AccountDetails";
 import { MOBILE_QUERY } from "../../utils/responsive";
 import { switchNetworkMetamask } from "../../../ethereum/hooks/web3";
+import { SUPPORTED_WALLETS } from "../../../ethereum/constants/wallet";
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -89,6 +90,14 @@ const StatusIcon = ({ connector }) => {
     return (
       <Avatar
         src={WalletConnectIcon}
+        alt={"WalletConnect"}
+        className={classes.avatar}
+      />
+    );
+  } else if (connector === walletlink) {
+    return (
+      <Avatar
+        src={SUPPORTED_WALLETS.WALLET_LINK.iconURL}
         alt={"WalletConnect"}
         className={classes.avatar}
       />
