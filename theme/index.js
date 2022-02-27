@@ -40,9 +40,9 @@ export function colors(darkMode) {
 
     // backgrounds / greys
 
-    mainBg: darkMode ? "#191B1F" : "#FFF9F0",
-    headerBg: darkMode ? "#424242" : "#FFF9F0",
-
+    mainBg: darkMode ? "#191B1F" : "#FFF5F4",
+    headerBg: darkMode ? "#424242" : "#fff",
+    headerShadow: darkMode ? "#DDBBE0" : "#DDBBE0",
     background1: darkMode ? "#DDBBE0" : "#DDBBE0",
     //specialty colors
     modalBG: darkMode ? "rgba(0,0,0,.425)" : "rgba(0,0,0,0.3)",

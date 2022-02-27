@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     padding: 20,
     height: "100%",
     textAlign: "center",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       height: "initial",
       marginBottom: theme.spacing(4),
     },

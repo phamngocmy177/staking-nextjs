@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     paddingLeft: theme.spacing(4),
     paddingRight: theme.spacing(4),
+    boxShadow: `0px 4px 34px -12px ${theme.colors.headerShadow}`,
   },
   logoLink: {
     zIndex: 1,

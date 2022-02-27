@@ -15,11 +15,16 @@ function Staking() {
     <Layout>
       <Container maxWidth="lg">
         {activePrograms.map((program) => (
-          <Grid container justifyContent="space-between" key={program.address}>
-            <Grid item lg={4} sm={12} xs={12}>
+          <Grid
+            container
+            justifyContent="space-between"
+            key={program.address}
+            spacing={2}
+          >
+            <Grid item lg={6} sm={6} xs={12}>
               <UniStaking program={program} />
             </Grid>
-            <Grid item lg={4} sm={12} xs={12}>
+            <Grid item lg={6} sm={6} xs={12}>
               <StakedBalance program={program} />
             </Grid>
           </Grid>
