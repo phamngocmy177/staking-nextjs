@@ -118,6 +118,21 @@ function StakedBalance({ program }) {
        from ${program.title}`
     );
   };
+  const onClaim = async () => {
+    setOpenTransactionModal(true);
+
+    const payableAmount = 0;
+
+    sendTransaction(
+      "getReward",
+      [],
+      payableAmount,
+      account,
+      `Claim 
+        ${earnedAsset.formatValue()}
+       from ${program.title}`
+    );
+  };
 
   return (
     <Box className={classes.container}>
@@ -154,6 +169,11 @@ function StakedBalance({ program }) {
         disabled={amountWithdraw?.isZero()}
         onClick={onWithdraw}
         label={"Withdraw"}
+      />
+      <AppButton
+        disabled={earnedAsset.getAmount() <= 0}
+        onClick={onClaim}
+        label={"Claim Reward"}
       />
       <DialogTransactionWrapper
         transactionProps={transactionState}
