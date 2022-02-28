@@ -1,12 +1,14 @@
+import Box from "@material-ui/core/Box";
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 import InvestBase from "../../../components/StakingComponents/StakingForm/InvestBase";
 import { STAKING_ADDRESS } from "../../../ethereum/constants/address";
 import { useStakingContract } from "../../../ethereum/hooks/useContract";
+import { useTotalStakedBalance } from "../../../ethereum/hooks/useStakedBalance";
 import { useTransaction } from "../../../ethereum/hooks/useTransaction";
 import { useActiveWeb3React } from "../../../ethereum/hooks/web3";
 import { toPrice, toWei } from "../../../ethereum/utils/unitsHelper";
-import { makeStyles } from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
+import { BalanceRow } from "../StakedBalance";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -33,6 +35,11 @@ function UniStaking({ program, ...others }) {
   const stakingContract = useStakingContract(STAKING_ADDRESS[chainId]);
   const [sendTransaction, transactionState] = useTransaction(stakingContract);
 
+  const { loading: totalLoading, totalStakedAsset } = useTotalStakedBalance(
+    STAKING_ADDRESS[chainId],
+    program.depositAsset
+  );
+
   const onSubmit = async ({ enterAmount }) => {
     const txParams = [
       toWei(
@@ -57,6 +64,12 @@ function UniStaking({ program, ...others }) {
   return (
     <Box className={classes.container}>
       <Typography className={classes.title}>{program.title}</Typography>
+      <BalanceRow
+        label="TVL"
+        loading={totalLoading}
+        balance={totalStakedAsset}
+        symbol={program.depositAsset.symbol}
+      />
       <InvestBase
         onSubmit={onSubmit}
         {...program}

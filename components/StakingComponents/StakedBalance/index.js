@@ -9,9 +9,8 @@ import Skeleton from "react-loading-skeleton";
 import { STAKING_ADDRESS } from "../../../ethereum/constants/address";
 import { useStakingContract } from "../../../ethereum/hooks/useContract";
 import {
-  useUserStakedBalance,
-  useTotalStakedBalance,
   useEarnedBalance,
+  useUserStakedBalance,
 } from "../../../ethereum/hooks/useStakedBalance";
 import { useTransaction } from "../../../ethereum/hooks/useTransaction";
 import { useActiveWeb3React } from "../../../ethereum/hooks/web3";
@@ -62,6 +61,17 @@ function BalanceTypography({ loading, balance }) {
     </Typography>
   );
 }
+
+export function BalanceRow({ loading, balance, symbol, label }) {
+  const classes = useStyles();
+
+  return (
+    <Box className={classes.balanceRow}>
+      <Typography className={classes.balanceLabel}>{label}:</Typography>
+      <BalanceTypography loading={loading} balance={balance} symbol={symbol} />
+    </Box>
+  );
+}
 function StakedBalance({ program }) {
   const classes = useStyles();
   const { account, chainId } = useActiveWeb3React();
@@ -73,14 +83,15 @@ function StakedBalance({ program }) {
     STAKING_ADDRESS[chainId],
     program.depositAsset
   );
-  const { loading: totalLoading, totalStakedAsset } = useTotalStakedBalance(
-    STAKING_ADDRESS[chainId],
-    program.depositAsset
-  );
+
   const { loading: earnedLoading, earnedAsset } = useEarnedBalance(
     STAKING_ADDRESS[chainId],
     program.depositAsset
   );
+  // const rewardPerToken = useRewardPerToken(
+  //   STAKING_ADDRESS[chainId],
+  //   program.depositAsset
+  // );
   const [amountWithdraw, setAmountWithdraw] = useState(BigNumber.from(0));
 
   const stakingContract = useStakingContract(STAKING_ADDRESS[chainId]);
@@ -114,24 +125,13 @@ function StakedBalance({ program }) {
   return (
     <Box className={classes.container}>
       <Typography className={classes.title}>Withdraw</Typography>
-      <Box className={classes.balanceRow}>
-        <Typography className={classes.balanceLabel}>TVL:</Typography>
-        <BalanceTypography
-          loading={userLoading}
-          balance={totalStakedAsset}
-          symbol={program.depositAsset.symbol}
-        />
-      </Box>
-      <Box className={classes.balanceRow}>
-        <Typography className={classes.balanceLabel}>
-          Staked Balance:
-        </Typography>
-        <BalanceTypography
-          loading={totalLoading}
-          balance={userStakedAsset}
-          symbol={program.depositAsset.symbol}
-        />
-      </Box>
+
+      <BalanceRow
+        label={"Staked Balance"}
+        loading={userLoading}
+        balance={userStakedAsset}
+        symbol={program.depositAsset.symbol}
+      />
       <Box className={classes.balanceRow}>
         <Typography className={classes.balanceLabel}>Earned:</Typography>
         <BalanceTypography
