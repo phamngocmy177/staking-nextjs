@@ -30,27 +30,6 @@ export const useTotalStakedBalance = (contractAddress, token) => {
 
   return { loading, totalStakedAsset };
 };
-// export const useRewardPerToken = (contractAddress, token) => {
-//   const contract = useStakingContract(contractAddress);
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         // setLoading(true);
-//         console.log("contract", contract);
-//         const rewardPerToken = await contract.rewardPerToken();
-//         console.log("rewardPerToken", rewardPerToken);
-//         // setStakedBalance(BigNumber.from(balance));
-//         // setLoading(false);
-//       } catch (e) {
-//         console.log("error useStakedBalance", e);
-//         // setLoading(false);
-//       }
-//     };
-//     if (contract) {
-//       fetchData();
-//     }
-//   }, [contract]);
-// };
 
 export const useAPR = (contractAddress) => {
   const contract = useStakingContract(contractAddress);

@@ -30,6 +30,11 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     color: theme.colors.text1,
   },
+  apr: {
+    fontSize: 30,
+    color: theme.palette.primary.main,
+    fontWeight: "bold",
+  },
 }));
 function UniStaking({ program, ...others }) {
   const { account, chainId } = useActiveWeb3React();
@@ -73,7 +78,7 @@ function UniStaking({ program, ...others }) {
         balance={totalStakedAsset}
         symbol={program.depositAsset.symbol}
       />
-      <Typography className={classes.title}>
+      <Typography className={classes.apr}>
         APR: {parseFloat(apr * 100).toFixed(2)}%
       </Typography>
       <InvestBase
