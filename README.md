@@ -8,3 +8,12 @@
 ## Portfolio
 
 - ERC-20 tokens and LP Tokens
+
+## How to run
+
+- Set up your .env file, with
+  `NEXT_PUBLIC_INFURA_KEY=`
+  `NEXT_PUBLIC_ETHPLORER_KEY=`
+
+- Run `yarn`
+- Run `yarn dev`
