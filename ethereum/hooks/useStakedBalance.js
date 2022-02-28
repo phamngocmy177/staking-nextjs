@@ -52,6 +52,32 @@ export const useTotalStakedBalance = (contractAddress, token) => {
 //   }, [contract]);
 // };
 
+export const useAPR = (contractAddress) => {
+  const contract = useStakingContract(contractAddress);
+  const [apr, setAPR] = useState(0);
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const rewardRate = await contract.rewardRate();
+        const totalSupply = await contract.totalStaked();
+        const apr = (rewardRate * 604800 * 52) / totalSupply;
+
+        setAPR(apr);
+        setLoading(false);
+      } catch (e) {
+        console.log("error useStakedBalance", e);
+        // setLoading(false);
+      }
+    };
+    if (contract) {
+      fetchData();
+    }
+  }, [contract]);
+  return { loading, apr };
+};
+
 export const useEarnedBalance = (contractAddress, token) => {
   const contract = useStakingContract(contractAddress);
   const { account } = useActiveWeb3React();

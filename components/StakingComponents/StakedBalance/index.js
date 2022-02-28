@@ -88,10 +88,7 @@ function StakedBalance({ program }) {
     STAKING_ADDRESS[chainId],
     program.depositAsset
   );
-  // const rewardPerToken = useRewardPerToken(
-  //   STAKING_ADDRESS[chainId],
-  //   program.depositAsset
-  // );
+
   const [amountWithdraw, setAmountWithdraw] = useState(BigNumber.from(0));
 
   const stakingContract = useStakingContract(STAKING_ADDRESS[chainId]);

@@ -4,7 +4,10 @@ import Typography from "@material-ui/core/Typography";
 import InvestBase from "../../../components/StakingComponents/StakingForm/InvestBase";
 import { STAKING_ADDRESS } from "../../../ethereum/constants/address";
 import { useStakingContract } from "../../../ethereum/hooks/useContract";
-import { useTotalStakedBalance } from "../../../ethereum/hooks/useStakedBalance";
+import {
+  useTotalStakedBalance,
+  useAPR,
+} from "../../../ethereum/hooks/useStakedBalance";
 import { useTransaction } from "../../../ethereum/hooks/useTransaction";
 import { useActiveWeb3React } from "../../../ethereum/hooks/web3";
 import { toPrice, toWei } from "../../../ethereum/utils/unitsHelper";
@@ -34,7 +37,7 @@ function UniStaking({ program, ...others }) {
 
   const stakingContract = useStakingContract(STAKING_ADDRESS[chainId]);
   const [sendTransaction, transactionState] = useTransaction(stakingContract);
-
+  const { apr } = useAPR(STAKING_ADDRESS[chainId], program.depositAsset);
   const { loading: totalLoading, totalStakedAsset } = useTotalStakedBalance(
     STAKING_ADDRESS[chainId],
     program.depositAsset
@@ -70,6 +73,9 @@ function UniStaking({ program, ...others }) {
         balance={totalStakedAsset}
         symbol={program.depositAsset.symbol}
       />
+      <Typography className={classes.title}>
+        APR: {parseFloat(apr * 100).toFixed(2)}%
+      </Typography>
       <InvestBase
         onSubmit={onSubmit}
         {...program}
