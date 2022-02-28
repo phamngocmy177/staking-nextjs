@@ -33,6 +33,8 @@ export const useTotalStakedBalance = (contractAddress, token) => {
 
 export const useAPR = (contractAddress) => {
   const contract = useStakingContract(contractAddress);
+  const { library } = useActiveWeb3React();
+  const version = useVersion();
   const [apr, setAPR] = useState(0);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -53,7 +55,7 @@ export const useAPR = (contractAddress) => {
     if (contract) {
       fetchData();
     }
-  }, [contract]);
+  }, [contract, library, version]);
   return { loading, apr };
 };
 

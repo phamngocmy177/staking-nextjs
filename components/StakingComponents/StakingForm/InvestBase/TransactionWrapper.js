@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 400,
     marginBottom: theme.spacing(2),
     width: "100%",
+    textAlign: "center",
   },
   subtitleTypography: {
     fontSize: 16,
