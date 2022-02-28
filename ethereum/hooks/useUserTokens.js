@@ -45,19 +45,15 @@ const classifyTokens = (token) => {
 
 export const useUserLpTokens = (lpTokens) => {
   function fetcher(...tokens) {
-    const f = (item) => {
-      if (item.platform === LP_TOKEN_PLATFORM.UNISWAP_V2) {
-        return getUniswapv2LPTokenValue(item.address);
-      }
-      if (item.platform === LP_TOKEN_PLATFORM.UNISWAP_V3) {
-        return getUniswapv3LPTokenValue(item.address);
-      }
-      if (item.platform === LP_TOKEN_PLATFORM.SUSHISWAP) {
-        return getSushiswapLPTokenValue(item.address);
-      }
+    const getValueFunc = {
+      [LP_TOKEN_PLATFORM.UNISWAP_V2]: getUniswapv2LPTokenValue,
+      [LP_TOKEN_PLATFORM.UNISWAP_V3]: getUniswapv3LPTokenValue,
+      [LP_TOKEN_PLATFORM.SUSHISWAP]: getSushiswapLPTokenValue,
     };
+    const f = (item) => getValueFunc[item.platform](item.address);
     return Promise.all(tokens.map(f));
   }
+
   const lpAddresses = lpTokens;
   const address = lpAddresses;
   const { data } = useSWR(address, fetcher);
