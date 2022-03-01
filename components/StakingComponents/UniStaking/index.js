@@ -12,6 +12,7 @@ import { useTransaction } from "../../../ethereum/hooks/useTransaction";
 import { useActiveWeb3React } from "../../../ethereum/hooks/web3";
 import { toPrice, toWei } from "../../../ethereum/utils/unitsHelper";
 import { BalanceRow } from "../StakedBalance";
+import Skeleton from "react-loading-skeleton";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -42,7 +43,10 @@ function UniStaking({ program, ...others }) {
 
   const stakingContract = useStakingContract(STAKING_ADDRESS[chainId]);
   const [sendTransaction, transactionState] = useTransaction(stakingContract);
-  const { apr } = useAPR(STAKING_ADDRESS[chainId], program.depositAsset);
+  const { apr, loading: aprLoading } = useAPR(
+    STAKING_ADDRESS[chainId],
+    program.depositAsset
+  );
   const { loading: totalLoading, totalStakedAsset } = useTotalStakedBalance(
     STAKING_ADDRESS[chainId],
     program.depositAsset
@@ -79,7 +83,12 @@ function UniStaking({ program, ...others }) {
         symbol={program.depositAsset.symbol}
       />
       <Typography className={classes.apr}>
-        APR: {parseFloat(apr * 100).toFixed(2)}%
+        APR:{" "}
+        {aprLoading ? (
+          <Skeleton width={100} height={30} />
+        ) : (
+          `${parseInt(apr * 100)}%`
+        )}
       </Typography>
       <InvestBase
         onSubmit={onSubmit}
