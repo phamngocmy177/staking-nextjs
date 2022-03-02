@@ -5,7 +5,6 @@ import Slider from "@material-ui/core/Slider";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import React, { useState } from "react";
-import Skeleton from "react-loading-skeleton";
 import { STAKING_ADDRESS } from "../../../ethereum/constants/address";
 import { useStakingContract } from "../../../ethereum/hooks/useContract";
 import {
@@ -16,6 +15,7 @@ import { useTransaction } from "../../../ethereum/hooks/useTransaction";
 import { useActiveWeb3React } from "../../../ethereum/hooks/web3";
 import { parseByDecimals } from "../../../ethereum/utils/unitsHelper";
 import AppButton from "../../AppComponents/AppButton";
+import BalanceRow from "../BalanceRow";
 import DialogTransactionWrapper from "../StakingForm/InvestBase/DialogTransactionWrapper";
 
 const useStyles = makeStyles((theme) => ({
@@ -31,47 +31,8 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     color: theme.colors.text1,
   },
-  balanceRow: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginTop: 16,
-  },
-  balanceLabel: {
-    fontSize: 16,
-    fontWeight: 500,
-    color: theme.colors.text1,
-  },
-  balanceValue: {
-    fontSize: 20,
-    fontWeight: "bolder",
-    color: theme.colors.text1,
-  },
 }));
 
-function BalanceTypography({ loading, balance }) {
-  const classes = useStyles();
-
-  if (loading) {
-    return <Skeleton width={100} height={30} />;
-  }
-  return (
-    <Typography className={classes.balanceValue}>
-      {balance.formatValue()}
-    </Typography>
-  );
-}
-
-export function BalanceRow({ loading, balance, symbol, label }) {
-  const classes = useStyles();
-
-  return (
-    <Box className={classes.balanceRow}>
-      <Typography className={classes.balanceLabel}>{label}:</Typography>
-      <BalanceTypography loading={loading} balance={balance} symbol={symbol} />
-    </Box>
-  );
-}
 function StakedBalance({ program }) {
   const classes = useStyles();
   const { account, chainId } = useActiveWeb3React();
@@ -141,24 +102,22 @@ function StakedBalance({ program }) {
       <BalanceRow
         label={"Staked Balance"}
         loading={userLoading}
-        balance={userStakedAsset}
+        balance={userStakedAsset.formatValue()}
         symbol={program.depositAsset.symbol}
       />
-      <Box className={classes.balanceRow}>
-        <Typography className={classes.balanceLabel}>Earned:</Typography>
-        <BalanceTypography
-          loading={earnedLoading}
-          balance={earnedAsset}
-          symbol={program.depositAsset.symbol}
-        />
-      </Box>
+      <BalanceRow
+        label={"Earned"}
+        loading={earnedLoading}
+        balance={earnedAsset.formatValue()}
+        symbol={program.depositAsset.symbol}
+      />
+
       <Divider />
-      <Box className={classes.balanceRow}>
-        <Typography className={classes.balanceLabel}>Select Amount</Typography>
-        <Typography className={classes.balanceValue}>
-          {parseByDecimals(program.depositAsset.decimals, amountWithdraw)}
-        </Typography>
-      </Box>
+      <BalanceRow
+        label={"Select Amount"}
+        balance={parseByDecimals(program.depositAsset.decimals, amountWithdraw)}
+        symbol={program.depositAsset.symbol}
+      />
 
       <Slider
         value={percentWithdraw}

@@ -11,7 +11,7 @@ import {
 import { useTransaction } from "../../../ethereum/hooks/useTransaction";
 import { useActiveWeb3React } from "../../../ethereum/hooks/web3";
 import { toPrice, toWei } from "../../../ethereum/utils/unitsHelper";
-import { BalanceRow } from "../StakedBalance";
+import BalanceRow from "../BalanceRow";
 import Skeleton from "react-loading-skeleton";
 
 const useStyles = makeStyles((theme) => ({
@@ -79,7 +79,7 @@ function UniStaking({ program, ...others }) {
       <BalanceRow
         label="TVL"
         loading={totalLoading}
-        balance={totalStakedAsset}
+        balance={totalStakedAsset.formatValue()}
         symbol={program.depositAsset.symbol}
       />
       <Typography className={classes.apr}>

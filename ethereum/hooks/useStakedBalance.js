@@ -48,7 +48,7 @@ export const useAPR = (contractAddress) => {
         setAPR(apr);
         setLoading(false);
       } catch (e) {
-        console.log("error useStakedBalance", e);
+        console.log("error useAPR", e);
         // setLoading(false);
       }
     };
